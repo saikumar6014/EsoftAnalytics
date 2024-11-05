@@ -1,0 +1,511 @@
+{% extends 'base.html' %}
+
+{% block title %}Data Engineering | AI Space{% endblock %}
+
+{% block content %}
+<div class="DeContainer p-4">
+    <div class="mb-4">
+        <h1 class="Head mb-5">Data Engineering</h1>
+        <div class="">
+            <h2 class="deSubHeads">Data Collection</h2>
+            <p class="deSubContent">We gather relevant data from various sources, ensuring a comprehensive understanding
+                of your problem.</p>
+        </div>
+        <div class="mb-4">
+            <h2 class="deSubHeads">Model Training</h2>
+            <p class="deSubContent">Using cutting-edge machine learning techniques, we train our AI model to identify
+                patterns and make accurate predictions.</p>
+        </div>
+        <div class="mb-1">
+            <h2 class="deSubHeads">Personalized Recommendations</h2>
+            <p class="deSubContent">Receive a list of top recommendations, ranked by relevance and likelihood of
+                success, to guide your decision-making process.</p>
+        </div>
+    </div>
+</div>
+<div class="Form">
+    <div class="FormContainer container">
+        <div class="imageDiv d-none d-sm-block">
+            <img class="image img-fluid" src="/static/images/formImage.jpg" alt="">
+        </div>
+
+        <div class="formDiv shadow">
+            {% if show %}
+            <div class="row">
+                <div class="col-12 col-lg-12">
+                    <h2 class="imageText">Upload Files | AI Space</h2>
+                    <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" id="uploadForm" >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="filetype" style="color: black;">Select Source Type of Data:</label>
+                            <select class="form-control" id="typeofdata" name="typeofdata" onchange="showForm()">
+                                <option value="select">Select from the options below</option>
+                                <option value="cloud">Cloud</option>
+                                <option value="database">Database</option>
+                                <option value="file">File</option>
+                            </select>
+                        </div>
+                        <div class="form-elements" id="file_form" style="display:none">
+                            <div class="form-group">
+                                <input name="filename" type="text" class="form-control" id="filename"
+                                    aria-describedby="emailHelp" placeholder="Enter Filename">
+                                <p style="color: red;" id="filenameError" class="error" name="filenameError"></p>
+                            </div>
+                            <div class="form-group">
+                                <!-- <input name="file_extension" type="text" class="form-control" id="file_extension"
+                                    aria-describedby="fileExtensionHelp" placeholder="Enter File Extension"> -->
+                                    <select class="form-control" id="typeofext" name="typeofext" >
+                                        <option value="select">Select File Extension</option>
+                                        <option value="xls">.xls</option> 
+                                        <option value="xlsx">.xlsx</option>
+                                        <option value="xlsm">.xlsm</option>
+                                        <option value="xlsb">.xlsb</option>
+                                        <option value="csv">.csv</option>
+                                        <option value="html">.html</option>
+                                        <option value="json">.json</option>
+                                    </select>
+                                <p style="color: red;" id="file_extension_error" class="error" name="file_extension_error"></p>
+                            </div>
+                            <div class="form-group">
+                                <input style="height: 45px;" type="file" class="form-control" id="uploadfile"
+                                    aria-describedby="fileHelp" placeholder="Upload file" name="file" />
+                                <small id="fileHelp" class="form-text text-muted">We'll never share your file with
+                                    anyone else.</small>
+                                <p style="color: red;" id="UploadErrorMsg" class="error" name="UploadErrorMsg"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="cloud-elements" id="cloud_type" style="display:none">
+                            <label for="cloudtype" style="color: black;">Select Cloud Type:</label>
+                            <select class="form-control" id="cloudtype" name="cloudtype">
+                                <option value="select">Select from the options below</option>
+                                <option value="aws">AWS</option>
+                                <option value="azure">Azure</option>
+                                <option value="gcp">Google Cloud Platform</option>
+                            </select>
+                        </div>
+                        <div class="database-elements" id="database_type" style="display:none">
+                            <label for="databasetype" style="color: black;">Select Database Type:</label>
+                            <select class="form-control" id="databasetype" name="databasetype" onchange="showInput()">
+                                <option value="select">Select from the options below</option>
+                                <option value="mysql">MySQL</option>
+                                <option value="PostgreSQL">PostgreSQL</option>
+                                <option value="SQLite">SQLite</option>
+                                <option value="Oracle">Oracle</option>
+                                <option value="mssql">Microsoft SQL Server</option>
+                                <option value="Cassandra">Cassandra</option>
+                                <option value="DynamoDB">DynamoDB</option>
+                                <option value="MonogDB">MonogDB</option>
+                            </select><br>
+                            <div class="database-elements" id="database_form" style="display:none"  onsubmit="return validateForm(event)">
+                                <div class="mysql" id="mysql_form">
+                                    <div class="form-group">
+                                        <input name="mysql_connection_string" type="text" class="form-control"
+                                            id="mysql_connection_string" aria-describedby="textHelp"
+                                            placeholder="mysql://user:password@host/db">
+                                        <p style="color: red;" id="mysql_connection_string_error" class="error"
+                                            name="mysql_connection_string_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="mysql_tablename" aria-describedby="textHelp"
+                                            name="mysql_tablename" placeholder="Provide Table name">
+                                        <p style="color: red;" id="mysql_tablename_error" class="error" name="mysql_tablename_error">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="postgresql"  id="postgresql_form">
+                                    <div class="form-group">
+                                        <input name="postgresql_connection_string" type="text" class="form-control"
+                                            id="postgresql_connection_string" aria-describedby="textHelp"
+                                            placeholder="postgresql://user:password@host/db">
+                                        <p style="color: red;" id="postgresql_connection_string_error" class="error"
+                                            name="postgresql_connection_string_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="postgresql_tablename" aria-describedby="textHelp"
+                                            name="postgresql_tablename" placeholder="Provide Table name">
+                                        <p style="color: red;" id="postgresql_tablename_error" class="error" name="postgresql_tablename_error">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="sqlite"  id="sqlite_form">
+                                    <div class="form-group">
+                                        <input name="sqlite_filepath" type="text" class="form-control"
+                                            id="sqlite_filepath" aria-describedby="textHelp"
+                                            placeholder="/path/to/db.sqlite3">
+                                        <p style="color: red;" id="sqlite_filepath_error" class="error"
+                                            name="sqlite_filepath_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="sqlite_tablename" aria-describedby="textHelp"
+                                            name="sqlite_tablename" placeholder="Provide Table name">
+                                        <p style="color: red;" id="sqlite_tablename_error" class="error" name="sqlite_tablename_error">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="oracle"  id="oracle_form">
+                                    <div class="form-group">
+                                        <input name="oracle_connection_string" type="text" class="form-control"
+                                            id="oracle_connection_string" aria-describedby="textHelp"
+                                            placeholder="oracle://user:password@host:port/db">
+                                        <p style="color: red;" id="oracle_connection_string_error" class="error"
+                                            name="oracle_connection_string_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="oracle_tablename" aria-describedby="textHelp"
+                                            name="oracle_tablename" placeholder="Provide Table name">
+                                        <p style="color: red;" id="oracle_tablename_error" class="error" name="oracle_tablename_error">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mssql"  id="mssql_form">
+                                    <div class="form-group">
+                                        <input name="mssql_connection_string" type="text" class="form-control"
+                                            id="mssql_connection_string" aria-describedby="textHelp"
+                                            placeholder="mssql+pyodbc://user:password@dsn">
+                                        <p style="color: red;" id="mssql_connection_string_error" class="error"
+                                            name="mssql_connection_string_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="mssql_tablename" aria-describedby="textHelp"
+                                            name="mssql_tablename" placeholder="Provide Table name">
+                                        <p style="color: red;" id="mssql_tablename_error" class="error" name="mssql_tablename_error">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="cassandra"  id="cassandra_form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="cassandraContactPoints"  aria-describedby="textHelp"
+                                        name="cassandraContactPoints" placeholder="Provide ContactPoints">
+                                        <p style="color: red;" id="cassandra_contact_point_error" class="error"
+                                            name="cassandra_contact_point_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="cassandraPort" aria-describedby="textHelp"
+                                        name="cassandraPort" placeholder="Provide Port numbers">
+                                        <p style="color: red;" id="cassandra_port_error" class="error"
+                                            name="cassandra_port_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="cassandraKeyspace" aria-describedby="textHelp"
+                                         name="cassandraKeyspace" placeholder="Provide Key Space">
+                                         <p style="color: red;" id="cassandra_keyspace_error" class="error"
+                                            name="cassandra_keyspace_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="cassandra_tablename" aria-describedby="textHelp"
+                                            name="cassandra_tablename" placeholder="Provide Table name">
+                                        <p style="color: red;" id="cassandra_tablename_error" class="error" name="cassandra_tablename_error">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="dynamodb"  id="dynamodb_form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="dynamodb_tablename" aria-describedby="textHelp"
+                                            name="dynamodb_tablename" placeholder="host1,host2">
+                                        <p style="color: red;" id="dynamodb_tablename_error" class="error" name="dynamodb_tablename_error">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="mongodb"  id="mongodb_form">
+                                    <div class="form-group">
+                                        <input name="mongodb_connection_string" type="text" class="form-control"
+                                            id="mongodb_connection_string" aria-describedby="textHelp"
+                                            placeholder="mongodb://user:password@host:port/db">
+                                        <p style="color: red;" id="mongodb_connection_string_error" class="error"
+                                            name="mongodb_connection_string_error"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="mongodb_collectionname" aria-describedby="textHelp"
+                                            name="mongodb_collectionname" placeholder="Provide Collection name">
+                                        <p style="color: red;" id="mongodb_collectionname_error" class="error" name="mongodb_collectionname_error">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="aiModel" style="color: black;">Select AI Model:</label>
+                            <select class="form-control" id="aiModel" name="aiModel">
+                                <option value="traditional">Traditional AI</option>
+                                <option value="genAI">Gen AI</option>
+                            </select>
+                        </div>
+                        <button id="uploadBtn" type="submit" class="btn1 mb-1" form="uploadForm">Submit</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if notexists %}
+            <div class="SuccessDiv row" id="SuccessDiv">
+                <div class="col-lg-6">
+                    <img src="../static/images/tick.jpg" class="tickImage" alt="" srcset="">
+                    <p id="msg" class="msgGreen" name="msg">{{ msg }}</p>
+                    <div class="d-flex">
+                        <a style="margin-right:auto;" href="{% url 'upload' %}" id="">Back</a>
+                        <a style="margin-left:auto;" id="link" href="{% url 'list_datasources' %}" id="link"
+                            name="analyticsPage">{{ analyticsPage}}</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if exists %}
+            <div class="SuccessDiv row" id="SuccessDiv">
+                <div class="col-lg-6">
+                    <img src="../static/images/cross.jpg" class="tickImage" alt="" srcset="">
+                    <p id="msg" class="msgRed" name="msg">{{ msg }}</p>
+                    <div class="d-flex">
+                        <a class="Back" style="margin-right:auto;" href="{% url 'upload' %}" id="">Back</a>
+                        <a class="Link" style="margin-left:auto;" id="link" href="{% url 'list_datasources' %}"
+                            id="link" name="analyticsPage">{{ analyticsPage}}</a>
+                    </div>
+                </div>
+            </div>
+            {% elif error %}
+            <div class="SuccessDiv row" id="SuccessDiv">
+                <div class="col-lg-6">
+                    <img src="../static/images/cross.jpg" class="tickImage" alt="" srcset="">
+                    <p id="msg" class="msgRed" name="msg">{{ msg }}</p>
+                    <div class="d-flex">
+                        <a class="Back" style="margin-right:auto;" href="{% url 'upload' %}" id="">Back</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    // this function shows the sub forms on selection
+    function showForm() {
+        const typeofdata = document.getElementById('typeofdata').value;
+        const fileForm = document.getElementById('file_form');
+        const cloudtype = document.getElementById('cloud_type');
+        const databaseForm = document.getElementById('database_form');
+        const databasetype = document.getElementById('database_type');
+
+        fileForm.style.display = 'none';
+        databasetype.style.display = 'none';               
+        databaseForm.style.display = 'none';
+        cloudtype.style.display = 'none';
+        
+
+        if (typeofdata === 'file') {
+            fileForm.style.display = 'block';
+        } else if (typeofdata === 'database') {
+            databasetype.style.display = 'block';
+        } else if (typeofdata === 'cloud') {
+            cloudtype.style.display = 'block';
+        }
+
+    }
+
+    // this function is to show the forms to upload databases upon clicking database type
+    function showInput() {
+    const databaseForm = document.getElementById('database_form');
+    const databasetype = document.getElementById('databasetype').value;
+    const forms = {
+        mysql: document.getElementById('mysql_form'),
+        PostgreSQL: document.getElementById('postgresql_form'),
+        SQLite: document.getElementById('sqlite_form'),
+        Oracle: document.getElementById('oracle_form'),
+        mssql: document.getElementById('mssql_form'),
+        Cassandra: document.getElementById('cassandra_form'),
+        DynamoDB: document.getElementById('dynamodb_form'),
+        MonogDB: document.getElementById('mongodb_form')
+    };
+
+    for (const form in forms) {
+        forms[form].style.display = 'none';
+    }
+
+    if (databasetype !== 'select') {
+        forms[databasetype].style.display = 'block';
+        databaseForm.style.display = 'block';
+    } else {
+        databaseForm.style.display = 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("uploadForm").addEventListener('submit', function (event) {
+        let valid = true;
+
+        function checkField(id, errorId, condition, message) {
+            let field = document.getElementById(id);
+            let errorField = document.getElementById(errorId);
+            if (condition(field)) {
+                errorField.textContent = message;
+                valid = false;
+            } else {
+                errorField.textContent = "";
+            }
+        }
+
+        let typeofdata = document.getElementById('typeofdata').value;
+        let databasetype = document.getElementById('databasetype').value;
+
+        if (typeofdata === 'file') {
+            checkField('filename', 'filenameError', field => field.value.trim() === "", "Please enter the filename");
+            checkField('file_extension', 'file_extension_error', field => field.value.trim() === "", "Please enter valid extension");
+            checkField('uploadfile', 'UploadErrorMsg', field => field.value.trim() === "", "Please Upload File");
+        }
+
+        if (typeofdata === 'database') {
+            let dbFields = {
+                mysql: [
+                    { id: 'mysql_connection_string', errorId: 'mysql_connection_string_error', message: "Please enter the database connection string" },
+                    { id: 'mysql_tablename', errorId: 'mysql_tablename_error', message: "Please enter table name" }
+                ],
+                PostgreSQL: [
+                    { id: 'postgresql_connection_string', errorId: 'postgresql_connection_string_error', message: "Please enter the database connection string" },
+                    { id: 'postgresql_tablename', errorId: 'postgresql_tablename_error', message: "Please enter table name" }
+                ],
+                SQLite: [
+                    { id: 'sqlite_filepath', errorId: 'sqlite_filepath_error', message: "Please enter the filepath" },
+                    { id: 'sqlite_tablename', errorId: 'sqlite_tablename_error', message: "Please enter table name" }
+                ],
+                Oracle: [
+                    { id: 'oracle_connection_string', errorId: 'oracle_connection_string_error', message: "Please enter the database connection string" },
+                    { id: 'oracle_tablename', errorId: 'oracle_tablename_error', message: "Please enter table name" }
+                ],
+                mssql: [
+                    { id: 'mssql_connection_string', errorId: 'mssql_connection_string_error', message: "Please enter the database connection string" },
+                    { id: 'mssql_tablename', errorId: 'mssql_tablename_error', message: "Please enter table name" }
+                ],
+                Cassandra: [
+                    { id: 'cassandraContactPoints', errorId: 'cassandra_contact_point_error', message: "Please provide Contact Points" },
+                    { id: 'cassandraPort', errorId: 'cassandra_port_error', message: "Please provide Port number" },
+                    { id: 'cassandraKeyspace', errorId: 'cassandra_keyspace_error', message: "Please provide Key Space" },
+                    { id: 'cassandra_tablename', errorId: 'cassandra_tablename_error', message: "Please enter table name" }
+                ],
+                DynamoDB: [
+                    { id: 'dynamodb_tablename', errorId: 'dynamodb_tablename_error', message: "Please enter table name" }
+                ],
+                MonogDB: [
+                    { id: 'mongodb_connection_string', errorId: 'mongodb_connection_string_error', message: "Please enter the database connection string" },
+                    { id: 'mongodb_collectionname', errorId: 'mongodb_collectionname_error', message: "Please enter collection name" }
+                ]
+            };
+
+            if (dbFields[databasetype]) {
+                dbFields[databasetype].forEach(field => {
+                    checkField(field.id, field.errorId, f => f.value.trim() === "", field.message);
+                });
+            }
+        }
+
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+});
+
+
+//to validate the file extensions
+function validateFileExtension() {
+    var fileExtensionInput = document.getElementById("file_extension");
+    var fileExtension = fileExtensionInput.value.trim().toLowerCase();
+
+    var allowedExtensions = ["csv", "txt", "pdf", "xlsx", "py", "doc", "docx"]; 
+
+    var isValid = allowedExtensions.includes(fileExtension);
+
+    if (!isValid) {
+        fileExtensionInput.setCustomValidity("Invalid file extension. Allowed extensions are: " + allowedExtensions.join(", "));
+    } else {
+        fileExtensionInput.setCustomValidity("");
+    }
+}
+
+document.getElementById("file_extension").addEventListener("input", validateFileExtension);
+
+function validateConnectionString(inputId, errorId, protocol = "://", usernameRequired = true, passwordRequired = true, portRequired = true) {
+    var input = document.getElementById(inputId).value;
+    var error = document.getElementById(errorId);
+
+    if (input.startsWith(protocol) && input.includes("@") && input.includes(":") && input.includes("/")) {
+        error.innerText = "";
+        return true;
+    } else if (input === "") {
+        error.innerText = "Enter database connection string.";
+    } else {
+        error.innerText = "Invalid database connection string.";
+    }
+    return false;
+}
+
+function validateCassandraFields(contactPointsId, portId, keyspaceId, contactPointsErrorId, portErrorId, keyspaceErrorId) {
+    var contactPoints = document.getElementById(contactPointsId).value;
+    var port = document.getElementById(portId).value;
+    var keyspace = document.getElementById(keyspaceId).value;
+
+    var isValid = true;
+
+    if (contactPoints === "") {
+        document.getElementById(contactPointsErrorId).innerText = "Enter ContactPoints.";
+        isValid = false;
+    } else {
+        document.getElementById(contactPointsErrorId).innerText = "";
+    }
+
+    if (isNaN(port) || port === "") {
+        document.getElementById(portErrorId).innerText = "Port must be a number.";
+        isValid = false;
+    } else {
+        document.getElementById(portErrorId).innerText = "";
+    }
+
+    if (keyspace === "") {
+        document.getElementById(keyspaceErrorId).innerText = "Enter Keyspace.";
+        isValid = false;
+    } else {
+        document.getElementById(keyspaceErrorId).innerText = "";
+    }
+
+    return isValid;
+}
+
+document.getElementById("mysql_connection_string").addEventListener("input", function () {
+    validateConnectionString("mysql_connection_string", "mysql_connection_string_error");
+});
+document.getElementById("postgresql_connection_string").addEventListener("input", function () {
+    validateConnectionString("postgresql_connection_string", "postgresql_connection_string_error");
+});
+document.getElementById("sqlite_filepath").addEventListener("input", function () {
+    validateConnectionString("sqlite_filepath", "sqlite_filepath_error", "", false, false, false);
+});
+document.getElementById("oracle_connection_string").addEventListener("input", function () {
+    validateConnectionString("oracle_connection_string", "oracle_connection_string_error", "://", true, true, true);
+});
+document.getElementById("mssql_connection_string").addEventListener("input", function () {
+    validateConnectionString("mssql_connection_string", "mssql_connection_string_error", "mssql+pyodbc://");
+});
+document.getElementById("cassandraContactPoints").addEventListener("input", function () {
+    validateCassandraFields("cassandraContactPoints", "cassandraPort", "cassandraKeyspace", "cassandra_contact_point_error", "cassandra_port_error", "cassandra_keyspace_error");
+});
+document.getElementById("mongodb_connection_string").addEventListener("input", function () {
+    validateConnectionString("mongodb_connection_string", "mongodb_connection_string_error", "mongodb://");
+});
+
+function validateForm() {
+    e.preventDefault();
+var fileExtensionSelect = document.getElementById('typeofext');
+var fileExtensionError = document.getElementById('file_extension_error');
+
+if (fileExtensionSelect.value === 'select') {
+fileExtensionError.textContent = 'Please select a file extension.';
+return false; // Prevent form submission
+} else {
+fileExtensionError.textContent = ''; // Clear the error message
+return true; // Allow form submission
+}
+}
+
+</script>
+{% endblock %}
