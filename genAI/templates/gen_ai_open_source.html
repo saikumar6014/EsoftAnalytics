@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source AI</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(112.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(157.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(135deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(90deg, rgb(195, 195, 195), rgb(228, 228, 228));
+            background-blend-mode: overlay, overlay, overlay, normal;
+            min-height: 100vh;
+        }
+ 
+        .error {
+            color: red;
+        }
+ 
+        button {
+            padding: 8px 15px;
+            background-color: #36b0ed;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+ 
+        .container-fluid {
+            max-width: 600px;
+            padding: 30px;
+        }
+ 
+        form {
+            margin: 100px auto;
+            min-height: auto;
+            font-family: Poppins;
+            max-width: 600px;
+            padding: 30px;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 10px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+ 
+        h1 {
+            color: #36b0ed;
+        }
+ 
+        label {
+            font-weight: 700;
+            padding-top: 5px;
+        }
+ 
+        input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+ 
+        #output {
+            margin-top: 50px;
+            font-weight: 600;
+        }
+ 
+        .output-form h3 {
+            margin-left: 45%;
+            color: #36b0ed;
+        }
+ 
+        #question,
+        #answer {
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+        }
+ 
+        a,
+        a:hover {
+            text-decoration: none !important;
+            color: #36b0ed;
+        }
+    </style>
+</head>
+<body>
+    <div class="navContainer">
+        <nav class="navbar navbar-expand-lg fixed-top bg-dark">
+            <div class="">
+                <a style="font-size: 20px; padding-left:5px" class="navbar-brand text-white" href="/"> AI Space | </a>
+                <a style="font-size: 20px; text-decoration: none;" class="text-white ml-auto" href="/gen_ai_home">Generative AI </a>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <form method="post" action="{% url 'question_view_open_source' %}" id="form_ai">
+        {% csrf_token %}
+        <h1>Open Source</h1>
+    
+        <label for="model_name">Choose a model:</label>
+        <select id="model_name" name="model_name">
+            <option value="">--Select a model--</option>
+            <option value="llama3">llama3</option>
+            <option value="phi2">phi2</option>
+            <option value="mistral">mistral</option>
+            <option value="aya">aya</option>
+            <option value="others">others</option>
+        </select>
+        <div id="model_name_error" class="error">Model selection is required.</div>
+        <br>
+    
+        <button type="submit" id="submit-input">Submit</button>
+        <div id="output"></div>
+    </form>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide output initially
+            const output = document.getElementById('output');
+            output.style.display = 'none';
+            
+            // Form submit event listener
+            document.getElementById('form_ai').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Validate model selection
+                const modelName = document.getElementById('model_name').value;
+                const modelNameError = document.getElementById('model_name_error');
+                
+                if (modelName === '') {
+                    modelNameError.textContent = 'Please select a model.';
+                    return;
+                } else {
+                    modelNameError.textContent = '';
+                }
+                
+                
+            });
+        });
+    </script>
+</body>
+</html>

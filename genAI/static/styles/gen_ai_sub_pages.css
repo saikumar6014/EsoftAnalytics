@@ -1,0 +1,154 @@
+/* .image {
+  text-align: center;
+  color: white;
+} */
+
+.image img {
+  width: 70%;
+  height: 100vh;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.image h2 {
+  position: absolute;
+  top: 50%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 0 4px 6px #36b0ed;
+  font-size: 40px;
+}
+
+.headContent {
+  color: aliceblue;
+  position: absolute;
+}
+
+.noliststyle li {
+  list-style: disc;
+  text-align: left;
+}
+
+.tra_ml_hp_data {
+  position: relative;
+  height: auto;
+  margin-bottom: 5%;
+  padding: 2%;
+  width: auto;
+  overflow-x: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.ml_main_content_head {
+  color: #36b0ed;
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-align: center;
+  margin: auto;
+  letter-spacing: 1px;
+}
+
+.ml_main_content_para {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.noliststyle {
+  text-align: center;
+  list-style: none;
+  color: white;
+  font-size: 18px !important;
+}
+
+.ml>h3,
+p {
+  text-align: left;
+  margin-top: 3%;
+  margin-left: 2%;
+}
+
+.benefits_list {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .videContent {
+    font-size: 15px;
+  }
+}
+
+.benefits {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #36b0ed;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mlContainer {
+  min-height: 500px !important;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+  border: 1px solid #36b0ed;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h3,
+h5 {
+  color: #36b0ed !important;
+  font-weight: 700;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  background-color: black !important;
+  color: white;
+  border: 1px solid #36b0ed;
+  width: 80%;
+}
+
+.explore_gen_ai {
+  background-color: #36b0ed !important;
+  color: white;
+  border: none;
+  width: 20%;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: white !important;
+}
+
+.explore_gen_ai:hover {
+  border: 1px solid #36b0ed;
+  background-color: transparent !important;
+}
+
+.btn-tertiary {
+  background-color: #e42c64 !important;
+  color: #fff;
+  border-radius: 30px;
+  border: none;
+  padding:10px !important;
+}

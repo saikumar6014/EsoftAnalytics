@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <title>Generative AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            max-width: 600px;
+            padding: 20px;
+            text-align: center;
+            margin: 40px;
+            max-width: 600px;
+        }
+
+ 
+        h4 {
+            font-size: 25px;
+            color: #007bff;
+ 
+        }
+  
+
+        .result-box {
+            border: none;
+            color: white;
+        }
+
+ 
+        html {
+            height: 100%;
+        }
+ 
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .navbar{
+            width:100%;
+            position: fixed;
+            top:0;
+            right:0;
+            z-index: 1000;
+            background-color: #0b0b0b;
+        }
+        
+        .form-select{
+            background-color:transparent;
+        }
+        
+    </style>
+</head>
+
+<body>
+  <div class="navContainer ">
+    <nav class="navbar navbar navbar-expand-lg navbar-dark" data-bs-theme="dark"
+        style="padding: 15px;background: #0b0b0b; ">
+        <div class="container-fluid">
+            <a style=" font-size: 20px" class="navbar-brand text-white" href="/">eSoftLabs AI Space |
+            </a>
+            <a style=" font-size: 20px;text-decoration: none;" class="text-white" href="/gen_ai_home">Gen AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a style=" font-size: 20px" class="nav-link text-white" aria-current="page" href="">
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a style=" font-size: 20px" class="nav-link text-white" href="{% url 'real_list_files' %}">Realtime Data</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+    <div class="container">
+      <div class="DataContainer text-center ">
+        <h1 class="DataHead1 p-2 mt-5" style="color:white;">
+            Generative AI
+        </h1>
+    </div>
+
+    <div class="container mt-9">
+        <form action="" method="POST" id="fileForm">
+            {% csrf_token %}
+            <p id="fileError" class="text-danger"></p>
+            <select class="btn btn-secondary dropdown-toggle form-select" name="filename"
+                aria-label="Select a file to predict" id="mainSelect">
+                <option value="" selected>Select a file to predict</option>
+                {% for file in files %}
+                <option value="{{ file }}" {% if file == selected_file %}selected{% endif %}>{{ file }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary submit-btn" type="submit" id="submitBtn">Submit</button>
+        </form>
+    </div>
+
+    <div id="selectedOptionsToProceedContainer" class="predict-opt" style="display: none;">
+        <select class="btn btn-secondary dropdown-toggle form-select" id="modelDropdown" 
+            aria-label="Default select example">
+            <option selected disabled>Choose LLM Models</option>
+            <option value="">GPT-3</option>
+            <option value="">ELECTRA</option>
+            <option value="">RoBERTa</option>
+            <option value="">BERT</option>
+        </select>
+        <div class="">
+            <button id="PredictButton" class="btn btn-warning predict-btn mt-3">Predict</button>
+        </div>
+        <!-- prediction button -->
+        <p id="predictionError"></p>
+    </div>
+  
+
+    <div class="col-12 col-md-12 col-lg-12 mt-3 mb-5">
+        <!-- <form action=""> -->
+        <div id="Result" style="display: none;">
+            <h4>Result:</h4>
+            <p name="" class="result-box" id="resultPlaceholder">Result will be displayed here</p>
+        </div>
+
+        </h4>
+        <!-- </form> -->
+    </div>
+
+    <div class="col-12 col-md-12 col-lg-12 mt-3 mb-5">
+        <!-- <form action=""> -->
+        <div id="Summary" style="display: none;">
+            <h4>Summary: </h4>
+            <p name="" class="result-box" id="summaryPlaceholder">Summary will be displayed here</p>
+        </div>
+        </h4>
+        <!-- </form> -->
+    </div>
+
+</div>
+
+        <!-- Your other content here -->
+    </div>
+    <canvas id="starCanvas"></canvas>
+
+    <script>
+      document.getElementById('fileForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            let selectedFile = document.getElementById('mainSelect').value;
+            if (selectedFile === '') {
+                // document.getElementById('fileError').textContent = 'Please select a file'; //uncomment this
+                document.getElementById('selectedOptionsToProceedContainer').style.display = "block"; //comment or remove this line after adding files
+            } else {
+                document.getElementById('fileError').textContent = '';
+                document.getElementById('selectedOptionsToProceedContainer').style.display = "block";
+            }
+        });
+
+        document.getElementById('modelDropdown').addEventListener('change', function () {
+            let selectedOptions = document.getElementById('modelDropdown');
+            let predictButton = document.getElementById('PredictButton');
+
+            if (selectedOptions.value !== 'Choose LLM Models') {
+                predictButton.disabled = false;
+                document.getElementById('PredictButton').addEventListener('click', function () {
+                    let Result = document.getElementById('Result');
+                    let Summary = document.getElementById('Summary');
+                    Result.style.display = "block";
+                    Summary.style.display = "block";
+                })
+            } else {
+                predictButton.disabled = true;
+            }
+        });
+
+        // predictButton.disabled = true;
+
+
+        function getCSRFToken() {
+            const metaTag = document.querySelector('meta[name="csrf-token"]');
+            if (metaTag) {
+                return metaTag.getAttribute('content');
+            } else {
+                console.error('CSRF token meta tag not found.');
+                return null;
+            }
+        }
+        var maxx = document.body.clientWidth;
+        var maxy = document.body.clientHeight;
+        var halfx = maxx / 2;
+        var halfy = maxy / 2;
+        var canvas = document.getElementById("starCanvas");
+        var context = canvas.getContext("2d");
+        canvas.width = maxx;
+        canvas.height = maxy;
+        var dotCount = 200;
+        var dots = [];
+        // create dots
+        for (var i = 0; i < dotCount; i++) {
+            dots.push(new dot());
+        }
+
+        // dots animation
+        function render() {
+            context.fillStyle = "#000000";
+            context.fillRect(0, 0, maxx, maxy);
+            for (var i = 0; i < dotCount; i++) {
+                dots[i].draw();
+                dots[i].move();
+            }
+            requestAnimationFrame(render);
+        }
+
+        // dots class
+        // @constructor
+        function dot() {
+            this.rad_x = 2 * Math.random() * halfx + 1;
+            this.rad_y = 1.2 * Math.random() * halfy + 1;
+            this.alpha = Math.random() * 360 + 1;
+            this.speed = Math.random() * 100 < 50 ? 1 : -1;
+            this.speed *= 0.1;
+            this.size = Math.random() * 5 + 1;
+            this.color = Math.floor(Math.random() * 256);
+        }
+
+        // drawing dot
+        dot.prototype.draw = function () {
+            var dx = halfx + this.rad_x * Math.cos(this.alpha / 180 * Math.PI);
+            var dy = halfy + this.rad_y * Math.sin(this.alpha / 180 * Math.PI);
+            context.fillStyle = "rgb(" + this.color + "," + this.color + "," + this.color + ")";
+            context.fillRect(dx, dy, this.size, this.size);
+        };
+
+        // calc new position in polar coord
+        dot.prototype.move = function () {
+            this.alpha += this.speed;
+            if (Math.random() * 100 < 50) {
+                this.color += 1;
+            } else {
+                this.color -= 1;
+            }
+        };
+
+        // start animation
+        render();
+    </script>
+</body>
+
+</html>

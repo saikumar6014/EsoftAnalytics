@@ -1,0 +1,249 @@
+body {
+    background-image: repeating-linear-gradient(113deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 23px, transparent 23px, transparent 25px), repeating-linear-gradient(64deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 23px, transparent 23px, transparent 25px), repeating-linear-gradient(330deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 23px, transparent 23px, transparent 25px), linear-gradient(90deg, rgb(255, 255, 255), rgb(8, 72, 250));
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.dashboard-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    /* Adjust width as needed */
+    background-color: #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+    color: white;
+    z-index: 1000;
+}
+
+.dashboard-item {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-item {
+    font-size: 24px;
+    display: flex;
+}
+
+.dashboard-item i {
+    margin-right: 10px;
+    margin-left: 15px;
+    font-weight: 600;
+}
+
+.dashboard-item a {
+    display: block;
+    font-size: 20px;
+    text-decoration: none !important;
+    color: white;
+}
+
+.home {
+    font-weight: 600;
+    margin-left: 10px;
+
+}
+
+.creativity {
+    margin-top: 60px;
+}
+.creativity h2{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    border: 1px solid white !important;
+    transition: transform 0.3s ease-in-out;
+    background: transparent;
+    padding:30px;
+
+}
+
+.card:hover {
+    transform: scale(1.05);
+    border:1px solid #36b0ed !important;
+}
+
+.card i {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: 700;
+    color:white;
+    
+}
+
+.card-text{
+    color:#36b0ed;
+}
+.content-container {
+    padding: 20px;
+}
+
+.heading {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #36b0ed;
+}
+
+.about_para {
+    margin: 20px;
+    font-size: 20px !important;
+}
+
+.main {
+    display: flex;
+    min-width: 100vw;
+    overflow-x: hidden;
+}
+
+.sub {
+
+    margin-left: 250px;
+    width: calc(100vw - 250px);
+    overflow: hidden;
+}
+
+.btn {
+    background: #36b0ed;
+    padding: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: white;
+    font-size: 15px;
+}
+
+.btn:hover {
+    color:white;
+    background-color: transparent;
+    border: 1px solid #36b0ed;
+}
+
+.insights-Header {
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-align: left !important;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.background-container {
+    /* background-image: url("{% static 'images/gen_AI.png' %}"); */
+    background-image: url("/static/images/gen_AI.png");
+    background-size: cover;
+    min-height: 100vh;
+    min-width: 80vw;
+    display: flex;
+    justify-content: start;
+    padding: 20px;
+    align-items: center;
+    border-radius: 0 0 50% 50%/0 0 20% 20%
+}
+
+.HeaderContant {
+    color: white;
+    font-size: 25px;
+    font-weight: 800px;
+    margin-bottom: 35px;
+    text-shadow: #36b0ed;
+}
+
+.HeroButton {
+    height: 55px;
+    width: 10%;
+    border: none;
+    border-radius: 15px;
+    font-weight: 600;
+    background-color: white !important;
+}
+
+.HeroButton:hover {
+    background-color: transparent !important;
+    border: 1px solid #eaedd4 !important;
+    color: #fff !important;
+}
+
+.HeroButton a {
+    text-decoration: none !important;
+    color: black;
+}
+
+.HeroButton:hover a {
+    color: white;
+}
+
+.about {
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+    padding-left: 55px;
+    padding-right: 55px;
+}
+.case_studies {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+.case_studies {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+padding: 30px;
+margin-top:20px;
+margin: 20px 0px 20px 0px;
+}
+
+.case_studies h2 {
+width: 100%;
+text-align: center;
+margin-bottom: 20px;
+}
+
+.case_studies .col-12 {
+flex: 0 0 calc(100% - 20px);
+margin-bottom: 20px;
+}
+.card {
+padding: 20px;
+color: black;
+border-radius: 8px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+height: 100%;
+}
+
+
+.card-title-cs {
+margin-top: 0;
+color:#36b0ed;
+}
+
+.card-description {
+margin-bottom: 10px;
+color:white;
+}
+
+@media (min-width: 768px) {
+.case_studies .col-md-6 {
+flex: 0 0 calc(50% - 20px);
+margin-bottom: 20px;
+}
+}
+
+@media (min-width: 992px) {
+.case_studies .col-lg-3 {
+flex: 0 0 calc(25% - 20px);
+margin-bottom: 20px;
+}
+}
+

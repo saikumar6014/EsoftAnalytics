@@ -1,0 +1,114 @@
+<!-- {%extends "base_gen_ai.html"%}
+
+{%block content%}
+{% comment %}
+<div class="navContainer">
+    <nav class="navbar navbar navbar-expand-lg fixed-top"
+        style="padding: 15px; ">
+        <div class="container-fluid">
+            <a style=" font-size: 20px" class="navbar-brand text-white" href="/">eSoftLabs AI Space
+            </a>
+            <a style=" font-size: 20px;text-decoration: none;" class="text-white"
+                href="/gen_ai_home">Generative AI
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="container-fluid image mb-5" style="padding-top: 70px;">
+    <img src="/static/images/geni_ai_img.jpg" class="card-img-top" alt="Gen AI">
+    <h2 class="headContent">Empowering Innovation and Efficiency: The Transformative Power of Generative AI</h2>
+</div>
+
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-12 mb-5" style="text-align: center; display: flex; justify-content: center; flex-direction: column;">
+            <h3 class="ml_main_content_head mb-3">Gen AI</h3>
+            <p class="ml_main_content_para" style="color: white;">Experience the Future Today with Gen AI: Personalized Solutions for Every Need.</p>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="shadow p-4 mlContainer">
+                <h3>Open Source</h3>
+                <p style="text-align: center; color: white; font-size: 20px;">Open source: Collaborative coding for a better tomorrow.</p>
+                <h5>Advantages</h5>
+                <ul class="noliststyle mb-3">
+                    <li>Open source software is often free to use, reducing the cost of software acquisition and licensing fees.</li>
+                    <li>The source code of open source software is openly available, allowing users to inspect, modify, and improve it, which can lead to greater security and reliability.</li>
+                    <li>Open source software encourages innovation by allowing developers to build upon existing projects and create new solutions.</li>
+                    <li>Open source software is often designed to be compatible with a wide range of platforms and systems, making it more versatile and interoperable.</li>
+                    <li>Open source projects can help build communities of like-minded individuals who collaborate, share ideas, and contribute to the advancement of technology.</li>
+                </ul>
+                <select class="btn btn-secondary dropdown-toggle form-select" id="modelDropdown" aria-label="Default select example">
+                    <option selected disabled>Choose Open Source Models</option>
+                    <option value="https://ollama.com/library/llama3">llama3</option>
+                    <option value="https://ollama.com/library/qwen2">qwen2</option>
+                    <option value="https://ollama.com/library/phi3">phi3</option>
+                    <option value="https://ollama.com/library/aya">aya</option>
+                    <option value="https://ollama.com/library/mistral">mistral</option>
+                </select>
+                
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="shadow p-4 mlContainer">
+                <h3>Open AI</h3>
+                <p style="text-align: center; color: white; font-size: 20px;">OpenAI: Unleashing the power of artificial intelligence for all.</p>
+                <h5>Advantages</h5>
+                <ul class="noliststyle mb-3">
+                    <li>OpenAI provides advanced NLP models like GPT-3 for tasks such as text generation, translation, summarization, and sentiment analysis.</li>
+                    <li>OpenAI's models can automate various tasks, reducing the need for manual intervention and improving efficiency.</li>
+                    <li>OpenAI's GPT models can generate human-like text, which is useful for content creation, chatbots, and virtual assistants.</li>
+                    <li>OpenAI conducts research in AI and releases its findings, contributing to the advancement of the field and promoting transparency.</li>
+                    <li>OpenAI's research and tools can help make AI more accessible to developers and researchers, enabling them to build innovative applications.</li>
+                </ul>
+                <select class="btn btn-secondary dropdown-toggle form-select" id="modelDropdown" aria-label="Default select example">
+                    <option selected disabled>Rest API Call</option>
+                     <option value="">GPT-3</option>
+                    <option value="">ELECTRA</option>
+                    <option value="">RoBERTa</option>
+                    <option value="">BERT</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="benefits shadow">
+                <h4 style="color:#36b0ed">Benefits</h4>
+                <h2 style="font-weight: 100; color: white;">Innovate Faster, Create Smarter with Generative AI</h2>
+                <ul class="noliststyle">
+                    <li>Automates the generation of text, images, music, and video.</li>
+                    <li>Enhances user experience by providing customized suggestions in e-commerce, streaming, and social media platforms.</li>
+                    <li>Streamlines repetitive and time-consuming tasks like data entry, report generation, and coding.</li>
+                    <li>Reduces labor costs associated with content creation and data processing.</li>
+                    <li>Provides real-time translation services, breaking down language barriers.</li>
+                    <li>Generates realistic synthetic data to test security systems and protocols.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Add this to your JavaScript
+window.addEventListener('scroll', function() {
+    var navbar = document.querySelector('.navbar');
+    if (window.scrollY > 0) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+        document.getElementById('modelDropdown').addEventListener('change', function () {
+            var url = this.value;
+            if (url) {
+                window.location.href = url;
+            }
+        });
+    
+
+</script>
+{% endcomment %}
+{%endblock%} -->

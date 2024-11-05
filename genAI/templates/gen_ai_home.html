@@ -1,0 +1,248 @@
+
+
+{%extends "base_gen_ai.html"%}
+ 
+ 
+{%block content%}
+
+    <div class="main">
+        <div class="dashboard-container">
+            <div class="dashboard-item">
+                <a href="/" class="home">eSoftLabs AI Space</a>
+            </div>
+            <div class="dashboard-item">
+                <i class="bi bi-pencil-square"></i>
+                <a href="/gen_ai_home">Text Edit Tool</a>
+            </div>
+            <div class="dashboard-item">
+                <i class="bi bi-chat-dots"></i>
+                <a href="/gen_ai_home">Chat Bot</a>
+            </div>
+            <div class="dashboard-item">
+                <i class="bi bi-file-earmark-text"></i>
+                <a href="/gen_ai_home">Summarization</a>
+            </div>
+            <div class="dashboard-item">
+                <i class="bi bi-info-circle"></i>
+                <a href="/about_page">About</a>
+            </div>
+            <div class="dashboard-item">
+                <i class="bi bi-question-square"></i> 
+                <a href="/gen_ai">Q & A</a>
+            </div>
+
+        </div>
+        <div class="sub">
+            <!-- <div class="background-container">
+                <div class="container-fluid content-container">
+                    <div class="heroDiv">
+                        <h2 class="insights-Header">"Ready to experience the magic of Generative AI?<br> Let's create
+                            something extraordinary together!"</h2>
+                        <p class="HeaderContant">Stay at the forefront of innovation. Dive into the latest trends,
+                            data-driven
+                            insights, and
+                            AI breakthroughs brought to you by eSoftLabs AI Space.
+                        </p>
+                        <button class="HeroButton"><a class="HeroAnchor" href="#main_page">Know more</a></button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="about sections">
+                <h2 class="heading" id="main_page">About Gen AI</h2>
+                <p class="about_para mb-5">Generative AI refers to a class of artificial intelligence technologies
+                    that are used to generate new content, such as images,
+                    text, audio, and video, that is similar to content that was used to train the AI model.
+                    Unlike traditional
+                    AI systems that are designed to perform specific tasks based on predefined rules, generative
+                    AI models are
+                    capable of creating new content that has not been explicitly programmed into them.</p>
+            </div>
+
+            <!-- <div class="container creativity">
+                <div class="row">
+                    <h2 class="heading">Technological Significance</h2>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card text-center  shadow-sm">
+                            <h3 class="card-title">Content Creation</h3>
+                            <p class="card-text">Generative AI streamlines content creation by generating text, images.
+                                </p>
+                            <a href="#" class="btn btn-primary">Try yourself</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card text-center  shadow-sm">
+                            <h3 class="card-title">Quick Prototyping</h3>
+                            <p class="card-text"> It accelerates innovation with rapid prototyping and idea validation.
+                            </p>
+                            <a href="#" class="btn btn-primary">Try yourself</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card text-center  shadow-sm">
+                            <h3 class="card-title">Personalization</h3>
+                            <p class="card-text"> AI tailors experiences to individual preferences, enhancing user
+                                engagement.</p>
+                            <a href="#" class="btn btn-primary">Try yourself</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mb-4">
+                        <div class="card text-center  shadow-sm">
+                            <h3 class="card-title">Automation</h3>
+                            <p class="card-text">AI automates tasks, boosting efficiency and reducing manual effort.</p>
+                            <a href="#" class="btn btn-primary">Try yourself</a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="case_studies">
+                <h2 class="heading">Case Studies</h2>
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card  shadow-sm">
+                        <h3 class="card-title-cs">Art and Design: The Next Rembrandt</h3>
+                        <ul>
+                            <li class="card-description"><strong>Description:</strong>In 2016, a team of data scientists and art historians used generative AI to create a new painting in
+                                 the style of Dutch master Rembrandt.</li>
+                            <li class="card-description"><strong>Method:</strong>The team analyzed Rembrandt's works to identify patterns in his paintings, including brush strokes, color palette,
+                                 and subject matter. 
+                                They then used this data to train an AI algorithm to generate a new painting that mimicked Rembrandt's style.</li>
+                            <li class="card-description"><strong>Impact:</strong>This project showcased the potential of generative AI in art and design, demonstrating how AI 
+                                can be used to create new works of art in the style of famous artists.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card   shadow-sm">
+                        <h3 class="card-title-cs">Healthcare: Google DeepMind's AlphaFold</h3>
+                        <ul>
+                            <li class="card-description"><strong>Description:</strong> DeepMind's AlphaFold is a deep learning system that predicts the structure of proteins, which is critical
+                                 for understanding diseases and developing new drugs.</li>
+                            <li class="card-description"><strong>Method:</strong>AlphaFold uses a deep learning model trained on a vast database of protein structures to predict the
+                                 3D structure of a protein based on its amino acid sequence.</li>
+                            <li class="card-description"><strong>Impact:</strong>AlphaFold has significantly accelerated the process of protein structure prediction, 
+                                leading to breakthroughs in drug discovery and other areas of biomedical research.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card   shadow-sm">
+                        <h3 class="card-title-cs">Entertainment: AI-Generated Music</h3>
+                        <ul>
+                            <li class="card-description"><strong>Description:</strong> Several companies are using generative AI to create music. For example, OpenAI's MuseNet can generate
+                                 musical compositions in various styles and genres.</li>
+                            <li class="card-description"><strong>Method:</strong> MuseNet uses a deep neural network trained on a large dataset of musical scores to generate
+                                 new compositions. Users can specify parameters such as 
+                                style, instrumentation, and mood to customize the output.</li>
+                            <li class="card-description"><strong>Impact:</strong>AI-generated music has the potential to revolutionize the music industry by 
+                                providing musicians with new tools for creativity and inspiration.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card   shadow-sm">
+                        <h3 class="card-title-cs">Finance: Automated Trading</h3>
+                        <ul>
+                            <li class="card-description"><strong>Description:</strong>Generative AI is being used in finance for automated trading, where AI algorithms analyze market data and make trading decisions without human intervention.</li>
+                            <li class="card-description"><strong>Method:</strong>These algorithms use generative models to analyze historical market data, identify patterns and trends, and make predictions about future market movements.</li>
+                            <li class="card-description"><strong>Impact:</strong>: Automated trading using generative AI has the potential to increase efficiency and profitability in financial markets, but also raises ethical and regulatory concerns.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+            <div class="container-fluid text-center">
+                <div class="row">
+                    
+                    <div class="col-12 col-md-6 col-lg-6 mb-3">
+                        <div class="shadow p-4 mlContainer">
+                            <h3>Open Source</h3>
+                            <img src="../static/images/open source.jpg" class="card-img-top" style="height: 300px; width:auto; border-radius: 50px;" alt="open source">
+                            <p style="text-align: center; color: white; font-size: 20px;">Open source: Collaborative coding for a better tomorrow.</p>
+                            <button class="explore_gen_ai"><a href="/gen_ai_open_source">Explore</a></button>
+                        </div>
+                    </div>
+            
+                    <div class="col-12 col-md-6 col-lg-6 mb-3">
+                        <div class="shadow p-4 mlContainer">
+                            <h3>Open AI</h3>
+                            <img src="../static/images/open_ai.jpg" class="card-img-top" style="height: 300px; width:400px; border-radius: 50px;" alt="open ai">
+                            <p style="text-align: center; color: white; font-size: 20px;">OpenAI: Unleashing the power of artificial intelligence for all.</p>
+                            <button class="explore_gen_ai"><a href="/validate_api_key">Explore</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="benefits shadow">
+                            <h4 style="color:#36b0ed">Benefits</h4>
+                            <h2 style="font-weight: 100; color: white;">Innovate Faster, Create Smarter with Generative AI</h2>
+                            <ul class="noliststyle">
+                                <li>Automates the generation of text, images, music, and video.</li>
+                                <li>Enhances user experience by providing customized suggestions in e-commerce, streaming, and social media platforms.</li>
+                                <!-- <li>Streamlines repetitive and time-consuming tasks like data entry, report generation, and coding.</li> -->
+                                <li>Reduces labor costs associated with content creation and data processing.</li>
+                                <li>Provides real-time translation services, breaking down language barriers.</li>
+                                <li>Generates realistic synthetic data to test security systems and protocols.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer-48201 mt-5">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 pr-md-5">
+                            <a href="#" class="footer-site-logo d-block mb-4">eSoft AI Space</a>
+                            <p>We, esoftians provide you the best of the best outcomes. Feel free to contact us.</p>
+                        </div>
+                        <div class="col-md">
+                            <ul class="list-unstyled nav-links">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/about_page">About Us</a></li>
+                                <li><a href="/services_page">Services</a></li>
+                                <li><a href="/contact_page">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md">
+                            <ul class="list-unstyled nav-links">
+                                <li><a href="#">Clients</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Career</a></li>
+                                <li><a href="#">Testimonials</a></li>
+                                <li><a href="#">Journal</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md">
+                            <ul class="list-unstyled nav-links">
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Partners</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md text-md-center">
+                            <ul class="social list-unstyled">
+                                <li><a href="#"><span class="icon-instagram"></span></a></li>
+                                <li><a href="#"><span class="icon-twitter"></span></a></li>
+                                <li><a href="#"><span class="icon-facebook"></span></a></li>
+                                <li><a href="#"><span class="icon-pinterest"></span></a></li>
+                                <li><a href="#"><span class="icon-dribbble"></span></a></li>
+                            </ul>
+                            <p class=""><a href="/contact_page" class="btn btn-tertiary">Contact Us</a></p>
+                        </div>
+                    </div>
+                    <div class="analytic_bottom_line">
+                        <div class="text-center">
+                            <div class="copyright">
+                                <p class="analytics_P">&copy; 2019-2020 All Rights Reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        
+    </div>
+    
+    
+    {%endblock%}
