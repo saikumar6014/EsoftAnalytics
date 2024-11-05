@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Datasource Selection</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="firstField">
+        <label for="datasource">Select DataSource:</label><br>
+        <select class="form-select" aria-label="Default select example" id="datasource">
+            <option value="" selected disabled>select datasource</option>
+            {% for datasource in datasources %}
+            <option value="{{ datasource }}">{{ datasource }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div id="columnsList">
+        <!-- Columns for the selected datasource will be displayed here -->
+    </div>
+
+    <script>
+        // Function to fetch columns for the selected datasource
+        function getColumnsList(datasource) {
+            $.ajax({
+                url: '{% url "get_columns_list" %}',
+                type: 'GET',
+                data: {'file_name': datasource},
+                success: function(response) {
+                    $('#columnsList').html(response.columns_html);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching columns:', error);
+                }
+            });
+        }
+
+        // Event listener for datasource selection change
+        $('#datasource').change(function() {
+            var selectedDatasource = $(this).val();
+            if (selectedDatasource) {
+                getColumnsList(selectedDatasource);
+            } else {
+                $('#columnsList').html('');
+            }
+        });
+    </script>
+</body>
+</html>

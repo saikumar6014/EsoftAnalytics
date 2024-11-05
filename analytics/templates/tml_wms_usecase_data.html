@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   
+    <title>Traditional ML | WMS Usecase Data</title>
+    <style>
+        /* @import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900'); */
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            --h: 212deg;
+            --l: 43%;
+            --brandColor: hsl(var(--h), 71%, var(--l));
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            background-color: whitesmoke;
+            /* background-image: linear-gradient(112.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(157.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(135deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(90deg, rgb(195, 195, 195), rgb(228, 228, 228)); */
+            background-blend-mode: overlay, overlay, overlay, normal;
+            min-height: 100vh;
+        
+        }
+        .navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        .nav-item{
+            list-style: none;
+            background-color: none;
+        }
+        .dropdown {
+            display: flex;
+            /* overflow: hidden; */
+            margin-top:4%;
+        }
+
+        .sub-categories {
+            height: 100%;
+            /* overflow-y: hidden; */
+        }
+
+        p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        ul {
+            list-style: none;
+            counter-reset: list;
+            padding: 0 1rem;
+        }
+
+        .dropdown li {
+            position: relative;
+            counter-increment: list;
+            max-width: 45rem;
+            margin: 10px auto;
+            padding: 1rem 1rem 1rem;
+            box-shadow: 0.1rem 0.1rem 1.5rem rgba(0, 0, 0, 0.3);
+            border-radius: 0.25rem;
+            /* overflow: hidden; */
+            background-color: white;
+        }
+
+        .categories li:hover {
+            background-color: beige;
+        }
+    
+        .categories li{
+            width: 250px;
+            font-weight: 800;
+        
+        }
+        .sub-categories li{
+            max-width:max-content;
+            
+        }
+        li::before {
+            --stop: calc(100% / var(--length) * var(--i));
+            --l: 62%;
+            --l2: 88%;
+            --c1: hsl(var(--h), 71%, var(--l));
+            --c2: hsl(var(--h), 71%, var(--l2));
+
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
+        }
+
+        .subcategory li a {
+            font-size: 20px;
+            font-weight: 600;
+        }
+                       
+    </style>
+</head>
+
+<body>
+     <!-- Navbar -->
+        <nav class="navbar navbar navbar-expand-lg bg-dark" data-bs-theme="dark"
+            style="padding: 15px;background: #0b0b0b; ">
+            <div class="container-fluid">
+                <a style=" font-size: 20px" class="navbar-brand text-white" href="/">eSoftLabs AI Space |
+                </a>
+                <a style="font-size: 20px;text-decoration: none;" class="text-white"
+                    href="{% url 'traditional_ml' %}">Traditional ML
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a style=" font-size: 20px " class="nav-link text-white" aria-current="page"
+                                href="{% url 'batch_list_files' %}">Batch
+                                Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" font-size: 20px" class="nav-link text-white"
+                                href="{% url 'real_list_files' %}">Realtime Data</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+    <div class="dropdown container-fluid" style="position: fixed; top: 0; right: 0;">
+        <div class="categories row">
+            <div class="col-12 col-md-6 col-lg-6 mb-3">
+                <ul>
+                    <div class="list" onclick="showSubcategories('category1')">
+                        <li><a class="dropdown-item" href="#">Performance
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category2')">
+                        <li><a class="dropdown-item" href="#">Planning
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category3')">
+                        <li><a class="dropdown-item" href="#">Quality
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category4')">
+                        <li><a class="dropdown-item" href="#">Efficiency
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category5')">
+                        <li><a class="dropdown-item" href="#">Cost
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category6')">
+                        <li><a class="dropdown-item" href="#">Compliance
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category7')">
+                        <li><a class="dropdown-item" href="#">Upskilling
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category8')">
+                        <li><a class="dropdown-item" href="#">Forecasting
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category9')">
+                        <li><a class="dropdown-item" href="#">Order
+                                Fulfilment
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category10')">
+                        <li><a class="dropdown-item" href="#">B2B Ordering
+                                Patterns
+                            </a></li>
+                    </div>
+                    <div class="list" onclick="showSubcategories('category11')">
+                        <li><a class="dropdown-item" href="#">Revenue Loss
+                            </a></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="sub-categories row">
+            <div class="col-12 col-md-6 col-lg-6 mb-3">
+                <div class="matter ">
+                    <ul>
+                        <li>
+                            <h1>Warehouse Management System</h1>
+                            <p> Warehouse Management System (WMS) is a software application that helps manage and
+                                control warehouse operations. </p>
+                            <ul>
+                                <li><strong>Inventory Management:</strong> WMS tracks the movement and storage of
+                                    inventory items within the warehouse. It provides real-time visibility into
+                                    inventory levels, locations, and status.</li>
+                                <li><strong>Order Management:</strong> WMS manages the processing of orders, including
+                                    order picking, packing, and shipping. It optimizes order fulfillment processes to
+                                    improve efficiency and accuracy.</li>
+                                <li><strong>Warehouse Layout Optimization:</strong> WMS helps optimize warehouse layout
+                                    and storage strategies to maximize space utilization and minimize travel time for
+                                    picking operations.</li>
+                                <li><strong>Inventory Tracking:</strong> WMS uses barcode or RFID technology to track
+                                    inventory items throughout the warehouse, ensuring accurate inventory counts and
+                                    reducing the risk of stockouts or overstock.</li>
+                                <li><strong>Labor Management:</strong> WMS helps manage warehouse workforce by assigning
+                                    tasks, tracking productivity, and optimizing labor resources to improve efficiency.
+                                </li>
+                                <li><strong>Reporting and Analytics:</strong> WMS provides reports and analytics on
+                                    warehouse performance, including inventory levels, order fulfillment rates, and
+                                    labor productivity, to help make informed decisions.</li>
+                                
+                                    <!-- <li><strong>Integration:</strong> WMS can integrate with other systems such as ERP
+                                    (Enterprise Resource Planning) systems, transportation management systems, and
+                                    e-commerce platforms to streamline operations and improve visibility across the
+                                    supply chain.</li> -->
+                                <!-- <li><strong>Compliance and Security:</strong> WMS helps ensure compliance with
+                                    regulations and standards related to warehouse operations, such as safety, security,
+                                    and inventory control.</li> -->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="perf subcategory " id="category1" onclick="clickSubCategories()">
+
+                    <div class="v-performance">
+                        <ul>
+                            <li>
+                                <a href="#">Vendor Delays – Purchase orders delayed to the warehouse</a>
+                                <p>Vendor delays causing purchase orders to be delayed to the warehouse pose significant
+                                    challenges for businesses, disrupting supply chain
+                                    operations and impacting customer satisfaction. Frequent delays in Purchase orders
+                                    to the warehouse from the vendor may
+                                    cause to lose trust on the particular vendor by that warehouse. Warehouse managers
+                                    could possibly look out for other vendors in order to eradicate the vendor delays.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="d-performance">
+                        <ul>
+                            <li>
+                                <a href="#">Unknown Products</a>
+                                <p>Unknown Products are the goods that are not recognized or identified within the
+                                    inventory system. Items that are mislabeled, damaged, or
+                                    have unclear markings, which make it difficult for warehouse staff to understand
+                                    their identity or origin are also considered as unknown products.
+                                    Unknown products are managed by isolating them from known inventory,
+                                    attempting to identify them by checking labels or packaging details, recording these
+                                    details for future reference, and storing them. </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="planning subcategory " id="category2" onclick="clickSubCategories()">
+                    <ul>
+                        <li>
+                            <a href="#">Unique Purchase Orders, Items & Quantities by month. Comparing Q-o-Q, Y-o-Y </a>
+                            <p>The analysis of unique purchase orders, items, and quantities by month involves tracking
+                                and understanding the flow of goods entering and exiting the warehouse over time.This
+                                analysis helps in identifying patterns, trends,
+                                and fluctuations in demand, which is crucial for optimizing inventory management and
+                                operational efficiency. </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="quality subcategory " id="category3" onclick="clickSubCategories()">
+                    <div class="vendor">
+                        <ul>
+                            <li>
+                                <a href="#">Shipment Reconciliation</a>
+                                <p>Shipment reconciliation is the process of matching actual inventory against booked
+                                    inventory.Reconciliation occurs only when order items are fully received.
+                                    Until reconciliation, inventory is not eligible for picking and remains in the
+                                    warehouse but not allocated space.
+                                    Shipment reconciliation ensures that inventory becomes eligible for picking.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="qual_assurance subcategory">
+                        <ul>
+                            <li>
+                                <a href="#">Hold - Recalled goods. Product Quality, Damaged products</a>
+                                <p>A status applied to inventory items that temporarily restricts their movement or
+                                    processing within
+                                    the warehouse. It is to be done if you want product unavailable for sale. To manage
+                                    holds, machine-learning algorithms can be
+                                    employed to analyze historical data on hold reasons, durations, and outcomes.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="eff subcategory " id="category4" onclick="clickSubCategories()">
+                    <div class="order">
+                        <ul>
+                            <li>
+                                <a href="#">Kits - Kits built Q-o-Q, Y-o-Y. Seasonal dependency. Better planning & order
+                                    fulfilment </a>
+                                <p>Kitting is a technique where different or related items are ordered, packaged and
+                                    shipped together as a single "kit."
+                                    Kitting can help companies generate higher revenue and increase operating
+                                    efficiency. At the same time, kitting can boost customer
+                                    satisfaction by providing customers with a convenient collection of related items at
+                                    an attractive price.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="loc_util subcategory">
+                        <ul>
+                            <li>
+                                <a href="#">Move - Warehouse management & Location occupancy </a>
+                                <p>The Move (Put) process involves placing items into their designated storage locations
+                                    within the warehouse after the picking process is done.
+                                    The primary objective of the Move (Put) process is to efficiently allocate storage
+                                    space within the warehouse to maximize capacity utilization.
+                                    The system decides where to put them based on factors like available space and item
+                                    type.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="loc subcategory">
+                        <ul>
+                            <li>
+                                <a href="#">Location Occupancy by Month, Quarter, Year </a>
+                                <p>Tracking the occupancy of locations within a warehouse over different time periods
+                                    (month, quarter, and year)
+                                    provides valuable insights into space utilization and helps optimize warehouse
+                                    layout and operations.By analyzing this data,
+                                    warehouse managers can make informed decisions about layout optimization,
+                                    inventory placement, and resource allocation to improve overall warehouse efficiency
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pick subcategory">
+                        <ul>
+                            <li>
+                                <a href="#">Picking Efficiency</a>
+                                <p>Picking efficiency is crucial for maintaining inventory accuracy and achieving high
+                                    order fulfillment rates.
+                                    It involves optimizing the layout of the warehouse to facilitate the timely and
+                                    accurate selection of items in the correct quantity and quality.
+                                    Efficient picking operations help minimize labor costs while maximizing order
+                                    fulfillment rates, ultimately contributing to overall operational success. </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pack subcategory">
+                        <ul>
+                            <li>
+                                <a href="#">Packing Efficiency.</a>
+                                <p>Packing is the process of getting items ready to send out. It means putting them in
+                                    boxes or envelopes,
+                                    making sure they're safe, and labeling them with where they need to go. Packing
+                                    means choosing the right boxes and materials to keep items safe during shipping.
+                                    It's about using space wisely to save money on shipping.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="time subcategory">
+                        <ul>
+                            <li>
+                                <a href="#">Put away – Elapsed Time </a>
+                                <p>The amount of time taken to complete the put away from staging area to actual storing
+                                    location. Moving products in elapsed time helps
+                                    to monitor and analyze the efficiency and performance of the put-away
+                                    process, optimizing storage operations, reducing handling times, and enhancing
+                                    warehouse productivity. </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cost subcategory " id="category5" onclick="clickSubCategories()">
+                    <div class="labour">
+                        <ul>
+                            <li><a href="">Unkitting - Non-seasonal, reducing labour costs.</a>
+                                <p>Unkit involves breaking down assembled kits or bundles back into their individual
+                                    components.
+                                    Un-kitting is a critical component of efficient warehouse operations, enabling
+                                    organizations to unlock greater flexibility, accuracy, and
+                                    responsiveness in managing inventory and fulfilling customer orders. By integrating
+                                    un-kitting processes effectively within a Warehouse Management System,
+                                    organizations can enhance operational efficiency, optimize resource utilization, and
+                                    ultimately deliver superior customer experiences. </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="material">
+                        <ul>
+                            <li><a href="">Release - Repackaging.</a>
+                                <p>Release is the action of removing holds or restrictions placed on inventory items or
+                                    orders, allowing them to proceed through the warehouse operations.
+                                    The objective of managing inventory release transactions is to efficiently and
+                                    accurately release held inventory items for further processing,
+                                    such as picking, packing, and shipping, while minimizing costs and optimizing
+                                    resource utilization. </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="wms">
+                        <ul class="sub">
+                            <li><a href="">Printing - Increased warehouse maintenance cost.</a>
+                                <p>Printing is the process of generating physical labels, documents, or reports
+                                    necessary for efficient inventory management, order fulfillment, and
+                                    other warehouse operations through the WMS software.Printing aims to make warehouse
+                                    operations smoother by generating labels and documents needed for tasks like
+                                    inventory management,
+                                    order fulfillment, and shipping. </p>
+                            </li>
+
+                            <li><a href="">Replenishments - Better warehouse planning & Layout changes</a>
+                                <p>Replenishment is the process of moving inventory from reserve or bulk storage
+                                    locations to primary picking locations
+                                    to ensure that these locations have enough stock to fulfill orders efficiently. It
+                                    aims to maintain optimal inventory levels, enhance operational efficiency, and
+                                    ultimately,
+                                    improve customer satisfaction. </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="compliance subcategory " id="category6" onclick="clickSubCategories()">
+                    <div class="process">
+                        <ul>
+                            <li>
+                                <a href="#">Process Compliance</a>
+                                <p>Process Compliance refers to adhering to the specific workflows, procedures, and best
+                                    practices defined by the WMS software or the organization's operational standards.
+                                    By adhering to these processes and standards, organizations can optimize their
+                                    warehouse operations,
+                                    improve inventory accuracy, enhance order fulfillment efficiency, and meet customer
+                                    expectations.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="standards">
+                        <ul class="sub">
+                            <li><a href="">Loss of Revenue</a>
+                                <p>Monitoring product damage caused by specific equipment and employees is crucial for
+                                    identifying and addressing issues
+                                    that contribute to inventory losses and operational inefficiencies in the warehouse.
+                                    Understanding the causes of damage allows for targeted interventions to mitigate
+                                    risks and improve overall warehouse performance. </p>
+                            </li>
+                            <li><a href="">Scrap - Compliance standards</a>
+                                <p>Scrap management involves tracking and handling the disposal of expired or damaged
+                                    items.
+                                    Implement a scrap management system to minimize revenue loss, ensure compliance with
+                                    standards,
+                                    and gain insights into production efficiency through monitoring scrapped products.
+                                    It minimizes revenue loss, and provides valuable production insights.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="upskilling subcategory " id="category7" onclick="clickSubCategories()">
+                    <div class="training">
+                        <ul>
+                            <li>
+                                <a href="#">Benchmarks by Employee in comparison with the enterprise standards</a>
+                                <p> By comparing key performance indicators (KPIs) such as order fulfillment rates,
+                                    picking accuracy,
+                                    inventory turnover, and transaction times to the employees, managers can identify
+                                    high-performing employees and areas for improvement. </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="forecasting subcategory " id="category8" onclick="clickSubCategories()">
+                    <ul>
+                        <li>
+                            <a href="#">Seasonal impact on products ordered by customers </a>
+                            <p>Understanding How Seasons Affect Customer Orders Using Machine Learning.To analyze the
+                                seasonal impact on products ordered by customers, transaction data from the log table is
+                                utilized.
+                                Each transaction contains the start date, item number ordered, and customer identifier.
+                                Machine learning models are trained using this data to identify seasonal patterns in
+                                customer orders. </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="order_fulfilment subcategory " id="category9" onclick="clickSubCategories()">
+                    <ul>
+                        <li>
+                            <a href="#">Comparision of products received vs products shipped</a>
+                            <p>Comparing products received versus products shipped involves analyzing and reconciling
+                                the inventory quantities of items received into the warehouse with those shipped out to
+                                customers.
+                                It ensures accuracy in inventory management and order fulfillment processes.By
+                                double-checking the numbers, the system catches any mistakes and ensures orders are
+                                filled accurately. </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="patterns subcategory " id="category10" onclick="clickSubCategories()">
+                    <ul>
+                        <li>
+                            <a href="#">Customers ordering patterns </a>
+                            <p>This process explores the patterns in customer ordering behavior, focusing on
+                                business-to-business (B2B) ordering patterns.
+                                Using machine learning to study transaction data gives us important information about
+                                how customers behave and what they buy.
+                                This helps us make smart decisions to improve how we work, make customers happier, and
+                                make our business grow. </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="loss subcategory " id="category11" onclick="clickSubCategories()">
+                    <ul>
+                        <li>
+                            <a href="#">Damaged products by Equipment, Employee</a>
+                            <p>Monitoring product damage caused by specific equipment and employees is crucial for
+                                identifying and addressing issues that contribute to inventory losses and operational
+                                inefficiencies in the warehouse.
+                                Understanding the causes of damage allows for targeted interventions to mitigate risks
+                                and improve overall warehouse performance. </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="default">
+
+        </div>
+
+    </div>
+    <script>
+        // function showSubcategories(categoryId) {
+        //     var defaultPage = document.getElementById('default');
+        //     defaultPage.style.display = 'none';
+
+        //     var subcategories = document.querySelectorAll('.subcategory');
+        //     subcategories.forEach(function (subcategory) {
+        //         subcategory.style.display = 'none';
+        //         var firstChild = subcategory.querySelector(':first-child');
+        //         if (firstChild) {
+        //             firstChild.style.display = 'none';
+        //         }
+        //     });
+
+        //     var selectedSubcategory = document.getElementById(categoryId);
+        //     if (selectedSubcategory) {
+        //         selectedSubcategory.style.display = 'block';
+        //         var firstChild = selectedSubcategory.querySelector(':first-child');
+        //         if (firstChild) {
+        //             firstChild.style.display = 'block';
+        //         }
+        //     }
+        // }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var matterDiv = document.querySelector('.matter');
+            matterDiv.style.display = 'block';
+        });
+
+        function showSubcategories(categoryId) {
+            var defaultPage = document.getElementById('default');
+            defaultPage.style.display = 'none';
+
+            var subcategories = document.querySelectorAll('.subcategory');
+            subcategories.forEach(function (subcategory) {
+                subcategory.style.display = 'none';
+                var firstChild = subcategory.querySelector(':first-child');
+                if (firstChild) {
+                    firstChild.style.display = 'none';
+                }
+            });
+
+            var selectedSubcategory = document.getElementById(categoryId);
+            if (selectedSubcategory) {
+                selectedSubcategory.style.display = 'block';
+                var firstChild = selectedSubcategory.querySelector(':first-child');
+                if (firstChild) {
+                    firstChild.style.display = 'block';
+                }
+            }
+
+            var matterDiv = document.querySelector('.matter');
+            matterDiv.style.display = 'none';
+        }
+
+
+
+    </script>
+</body>
+
+</html>

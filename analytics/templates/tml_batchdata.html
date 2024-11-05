@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <!-- For handling XLSX files, you can use a library like xlsx-populate -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+    <title>Traditional ML | AI Space</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Poppins;
+        }
+
+        .DataHead {
+            color: blueviolet;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+
+        .container1 {
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: auto;
+            max-width: 600px;
+            
+        }
+
+
+        .container2 {
+            
+            padding: 20px;
+            text-align: center;
+            margin: auto;
+            max-width: 1500px;
+        }
+
+        .container2 h4 {
+            text-align: left;
+        }
+
+
+
+        .container3 {
+            padding: 20px;
+            max-width: 1500px;
+            align-items: center;
+            margin: auto;
+            text-align: center;
+
+        }
+
+        .container3 h4 {
+            text-align: left;
+        }
+
+
+        .predict-btn {
+
+            margin-top: 10px;
+        }
+
+        body {
+            /* background-image: linear-gradient(112.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(157.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(135deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(90deg, rgb(195, 195, 195), rgb(228, 228, 228)); */
+            background-blend-mode: overlay, overlay, overlay, normal;
+            min-height: 100vh;
+        }
+
+
+        .predict-opt {
+            margin-top: 20px;
+            /* Adjust the value as needed */
+            margin-right: 80px;
+        }
+
+        #uploadSection {
+            margin-right: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navContainer">
+        <nav class="navbar navbar navbar-expand-lg bg-dark" data-bs-theme="dark"
+            style="padding: 15px;background: #0b0b0b; ">
+            <div class="container-fluid">
+                <a style=" font-size: 20px" class="navbar-brand text-white" href="/">eSoftLabs AI Space |
+                </a>
+                <a style="font-size: 20px;text-decoration: none;" class="text-white"
+                    href="{% url 'traditional_ml' %}">Traditional ML
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <!-- <li class="nav-item">
+                            <a style=" font-size: 20px " class="nav-link text-white" aria-current="page"
+                                href="{% url 'batch_list_files' %}">Batch
+                                Data</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a style=" font-size: 20px" class="nav-link text-white"
+                                href="{% url 'real_list_files' %}">Realtime Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" font-size: 20px" class="nav-link text-white"
+                                href="{% url 'WMS_data' %}">WMS Use Case Data</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Data Section -->
+    <div class="DataContainer text-center">
+        <h1 class="DataHead p-2 text-primary">
+            Traditional Machine Learning Batch Data
+        </h1>
+    </div>
+
+    <div class="container1 mt-5 ">
+        <form id='fileForm' action="{% url 'batch_list_files' %}" method='POST'>
+            {% csrf_token %}
+            <p id="fileError" class="text-danger"></p>
+            <select class="btn btn-secondary dropdown-toggle form-select" name="filename" id="fileDropdown"
+                class="form-select" aria-label="Default select example">
+                <!-- models -->
+                <option selected disabled>Select A File To Predict</option>
+                {% for file in files %}
+                <option value="{{ file }}" {% if file == selected_file %}selected{% endif %}>{{ file }}</option>
+                {% endfor %}
+            </select>
+            <button id="fileSubmit" class="btn btn-primary submit-btn" type='submit'>Submit</button>
+        </form>
+
+        {% if show_table %}
+        <div id="displayModels">
+            {% comment %} Choose Options{% endcomment %}
+            <div id="selectedOptionsToProceedContainer" class="predict-opt mb-4">
+                <select class="btn btn-secondary dropdown-toggle form-select" aria-label="Default select example"
+                    id="selectedOptionsToProceed">
+                    <option selected disabled>Choose Options</option>
+                    <option value="Select pre-trained model">Pre-trained model</option>
+                    <option value="Upload">Build Custom Model</option>
+                </select>
+            </div>
+
+            <div id="preTrainedModelSection" class="predict-opt" style="display: none;">
+                <select class="btn btn-secondary dropdown-toggle" id="modelDropdown" class="form-select"
+                    aria-label="Default select example">
+                    <!-- models -->
+                    <option selected disabled>Open this select menu</option>
+                    {% for listmodel in listmodels %}
+                    <option value="{{ listmodel }}">{{ listmodel }}</option>
+                    {% endfor %}
+                </select>
+                <div>
+                    <button id="PredictButton" class="btn btn-warning predict-btn">Predict</button>
+                </div>
+                <!-- prediction button -->
+                <p id="predictionError"></p>
+            </div>
+
+            <!-- Upload model section for model -->
+            <div id="uploadSection" style="display: none;">
+                <p><a href="{% url 'uploadModel'  %}" id="uploadLink">Click here to upload</a></p>
+            </div>
+        </div>
+        {% endif %}
+
+
+
+        <div class="container2">
+            <!-- result Table -->
+            <h4 id="Predicted_DataSet" class="table-header text-primary mb-2" style="display: none;">Result:
+            </h4>
+            <div class="table table-striped predict-table" id="resultTable"></div>
+        </div>
+        <div class="container3">
+            <!-- Accuracy Table -->
+            <h4 id="Accuracy_DataSet" class="table-header text-primary mb-2" style="display: none;">Accuracy:
+            </h4>
+            <div id="AccuracyTable" class="table table-striped accuracy-table"></div>
+        </div>
+
+        <!-- Js -->
+        <meta name="csrf-token" content="your_csrf_token_here">
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const selectedOptions = document.getElementById('selectedOptionsToProceed');
+                const preTrainedModelSection = document.getElementById('preTrainedModelSection');
+                const uploadSection = document.getElementById('uploadSection');
+
+                selectedOptions.addEventListener("change", function () {
+                    if (this.value === "Select pre-trained model") {
+                        preTrainedModelSection.style.display = 'block';
+                        uploadSection.style.display = 'none';
+                    } else if (this.value === "Upload") {
+                        preTrainedModelSection.style.display = 'none';
+                        uploadSection.style.display = 'block';
+                    } else {
+                        preTrainedModelSection.style.display = 'none';
+                        uploadSection.style.display = 'none';
+                    }
+                });
+            });
+
+            function getCSRFToken() {
+                const metaTag = document.querySelector('meta[name="csrf-token"]');
+                if (metaTag) {
+                    return metaTag.getAttribute('content');
+                } else {
+                    console.error('CSRF token meta tag not found.');
+                    return null;
+                }
+            }
+
+            let PredictButton = document.getElementById('PredictButton');
+            // for error when user press the button without seleting models
+            PredictButton.addEventListener('click', function () {
+                let filename = document.getElementById('fileDropdown').value;
+                let selectedOption = document.getElementById('modelDropdown').value;
+                let predictionErrorMsg = document.getElementById('predictionError');
+
+                if (selectedOption === 'Choose a model') {
+                    predictionErrorMsg.textContent = 'Select a model to predict!';
+                } else {
+                    // Clear any previous error messages
+                    predictionErrorMsg.textContent = '';
+
+                    // Call the function to handle the selected rows and option
+                    getPassData(filename, selectedOption);
+                }
+            });
+      
+            function downloadCSV(data, filename) {
+                const csvContent = "data:text/csv;charset=utf-8," +
+                    data.map(row => row.join(',')).join('\n');
+
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", filename + '.csv');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // function for pass the data to views where we can manage the selected rows based on models
+            async function getPassData(filename, selectedOption) {
+                try {
+                    const csrfToken = getCSRFToken();
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': csrfToken
+                        },
+                        body: JSON.stringify({
+                            filename: filename,
+                            options: selectedOption       //  filename is defined as Selected filename
+                        })
+                    };
+                    const response = await fetch('/predictModel/', requestOptions);
+                    const responseData = await response.json();
+
+                    console.log('Full Response:', responseData);
+
+                    // Check if there is accuracy data
+                    if (responseData.Accuracy !== undefined) {
+                        // Create accuracy table
+                        document.getElementById('Accuracy_DataSet').style.display = 'block';
+                        const accuracyContainer = document.getElementById('AccuracyTable');
+                        accuracyContainer.innerHTML = ''; // Clear existing content
+                        const accuracyTable = document.createElement('table');
+                        accuracyTable.classList = 'table';
+                        const accuracyHead = document.createElement('thead');
+                        const accuracyHeaderRow = document.createElement('tr');
+                        const accuracyHeaderCol1 = document.createElement('th');
+                        accuracyHeaderCol1.classList = 'table-secondary';
+                        accuracyHeaderCol1.textContent = 'Metric';
+                        const accuracyHeaderCol2 = document.createElement('th');
+                        accuracyHeaderCol2.classList = 'table-secondary';
+                        accuracyHeaderCol2.textContent = 'Score';
+                        accuracyHeaderRow.appendChild(accuracyHeaderCol1);
+                        accuracyHeaderRow.appendChild(accuracyHeaderCol2);
+                        accuracyHead.appendChild(accuracyHeaderRow);
+                        accuracyTable.appendChild(accuracyHead);
+
+                        // Create accuracy table body
+                        const accuracyBody = document.createElement('tbody');
+                        const accuracyRow = document.createElement('tr');
+                        const accuracyMetricCell = document.createElement('td');
+                        accuracyMetricCell.textContent = 'Accuracy';
+                        const accuracyScoreCell = document.createElement('td');
+                        accuracyScoreCell.textContent = responseData.Accuracy + '%';
+
+                        accuracyRow.appendChild(accuracyMetricCell);
+                        accuracyRow.appendChild(accuracyScoreCell);
+                        accuracyBody.appendChild(accuracyRow);
+                        accuracyTable.appendChild(accuracyBody);
+
+                        accuracyContainer.appendChild(accuracyTable);
+                    }
+
+                    if (responseData && responseData.data) {
+                        const resultData = JSON.parse(responseData.data);
+                        // DOM creation of tables
+                        const tableContainer = document.getElementById('resultTable');
+                        let Predicted_DataSet = document.getElementById('Predicted_DataSet');
+                        Predicted_DataSet.style.display = 'block';
+
+                        // Clear existing content in the table container
+                        tableContainer.innerHTML = '';
+                        // created a table
+                        const table = document.createElement('table');
+                        table.style.width = '100%';
+
+                        // create a table head
+                        const thead = document.createElement('thead');
+                        const headerRow = document.createElement('tr');
+                        // loop over keys
+                        for (const key of Object.keys(resultData[0])) {
+                            const th = document.createElement('th');
+                            th.textContent = key;
+                            headerRow.appendChild(th);
+                        }
+                        // appending the child classes to the parent container
+                        thead.appendChild(headerRow);
+                        table.appendChild(thead);
+
+                        const tbody = document.createElement('tbody');
+                        // loop on values (rows) in table rows
+                        for (let i = 0; i < Math.min(resultData.length, 10); i++) {
+                            const item = resultData[i];
+                            const row = document.createElement('tr');
+
+                            for (const value of Object.values(item)) {
+                                const cell = document.createElement('td');
+                                cell.textContent = value;
+                                row.appendChild(cell);
+                            }
+                            // appending the child row to the parent body
+                            tbody.appendChild(row);
+                        }
+                        table.appendChild(tbody);
+
+                        const downloadBtn = document.createElement('button');
+                        downloadBtn.textContent = 'Download CSV';
+                        downloadBtn.classList = 'btn btn-primary mt-5 mb-5'
+                        downloadBtn.addEventListener('click', function () {
+                            const suggestedFilename = prompt('Enter the filename', 'ResultData');
+
+
+
+                            if (suggestedFilename !== null) {
+                                const getExtension = selectedOption.split('.').pop().toLowerCase();
+                                const fileType = 'csv'
+                                const filename = suggestedFilename.trim() || 'ResultData';
+
+                                downloadCSV([Object.keys(resultData[0]), ...resultData.map(Object.values)], filename, fileType);
+                            }
+                        });
+
+
+                        tableContainer.appendChild(table);
+                        tableContainer.appendChild(downloadBtn);
+                    }
+                    else {
+                        console.log('Prediction Failed!');
+                    }
+                    // handling exceptions
+                } catch (error) {
+                    console.error('Error:', error.message);
+                    console.log('Prediction Failed!');
+                }
+            }
+        </script>
+
+</body>
+
+</html>

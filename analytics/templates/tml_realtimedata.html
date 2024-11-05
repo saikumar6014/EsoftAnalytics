@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+    <title>Traditional ML | AI Space</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Poppins;
+        }
+
+        .DataHead {
+            color: blueviolet;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+        .container1 {
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: auto;
+            max-width: 600px;
+
+        }
+
+        .container2 {
+            padding: 20px;
+            text-align: center;
+            margin: auto;
+            max-width: 1500px;
+
+        }
+
+        .table-header {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+
+        .predict-btn {
+
+            margin-top: 10px;
+            margin-bottom: 50px;
+        }
+
+        .predict-opt {
+            margin-top: 10px;
+            margin-bottom: -20px;
+        }
+
+        .table {
+            width: 100%;
+        }
+
+        body {
+            background-image: linear-gradient(112.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(157.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(135deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%, rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%, rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%, rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%, rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%, rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%, rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%), linear-gradient(90deg, rgb(195, 195, 195), rgb(228, 228, 228));
+            background-blend-mode: overlay, overlay, overlay, normal;
+            min-height: 100vh;
+        }
+
+        .accuracy-metric-cell {
+            font-weight: bold;
+        }
+
+        #ModelURL {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+
+        #ModelURL:hover {
+            border-color: #aaa;
+        }
+
+
+        #ModelURL:focus {
+            border-color: #4CAF50;
+        }
+
+        .btn {
+            margin-bottom: 10px
+        }
+
+        #uploadModelFromURL,
+        #uploadModelFromLocal {
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Add hover effect */
+        #uploadModelFromURL:hover {
+            text-decoration: underline;
+        }
+
+        #uploadModelFromLocal:hover {
+            text-decoration: underline;
+        }
+
+        .drop-container {
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .drop-container input[type=file] {
+            display: none;
+        }
+
+        .drop-container p {
+            margin: 0;
+        }
+
+        /* Highlight the drop container when hovering over */
+        .drop-container:hover {
+            border-color: #007bff;
+        }
+
+        /* Highlight the drop container when dragging over */
+        .drop-container.dragover {
+            border-color: #007bff;
+        }
+
+        .file_browse {
+            cursor: pointer;
+        }
+
+        /* Popup container */
+        .popup {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Position fixed to stay on top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            z-index: 9999;
+            /* Ensure it overlays other content */
+            opacity: 0;
+            /* Start with opacity 0 */
+            transition: opacity 0.3s ease;
+            /* Add transition for opacity */
+
+        }
+
+        /* Show the popup */
+        .popup.active {
+            display: block;
+            opacity: 1;
+            /* Make the popup visible */
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: white;
+            width: 60%;
+            max-width: 600px;
+            margin: 100px auto;
+            /* Center the popup */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Close button */
+        .close {
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navContainer">
+        <nav class="navbar navbar navbar-expand-lg bg-dark" data-bs-theme="dark"
+            style="padding: 15px;background: #0b0b0b; ">
+            <div class="container-fluid">
+                <a style=" font-size: 20px" class="navbar-brand text-white" href="/">eSoftLabs AI Space |
+                </a>
+                <a style=" font-size: 20px;text-decoration: none;" class="text-white"
+                    href="{% url 'traditional_ml' %}">Traditional ML
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a style=" font-size: 20px" class="nav-link text-white" aria-current="page"
+                                href="{% url 'batch_list_files' %}">Batch
+                                Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" font-size: 20px" class="nav-link text-white" aria-current="page"
+                                href="{% url 'WMS_data' %}">WMS Use Case
+                                Data</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a style=" font-size: 20px" class="nav-link text-white" href="{% url 'real_list_files' %}">Realtime Data</a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Data Section -->
+    <div class="DataContainer text-center">
+        <h1 class="DataHead p-2 text-primary">
+            Traditional Machine Learning Realtime Data
+        </h1>
+    </div>
+
+    <div class="container1 mt-5 ">
+        <form action="{% url 'real_list_files' %}" method="POST" id="fileForm">
+            {% csrf_token %}
+            <p id="fileError" class="text-danger"></p>
+            <select class="btn btn-secondary dropdown-toggle form-select" name="filename"
+                aria-label="Default select example" id="mainSelect">
+                <!-- models -->
+                <option value="" selected>Select A File To Predict</option>
+                {% for file in files %}
+                <option value="{{ file }}" {% if file == selected_file %}selected{% endif %}>{{ file }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary submit-btn" type="submit" id="submitBtn">Submit</button>
+        </form>
+    </div>
+
+
+    {% if show_table %}
+    <div class="container2 container-fluid">
+        <!-- Grid -->
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="tableContainer">
+                    <h4 class="table-header text-primary mb-0">Selected DataSet:</h4>
+                    <table id="batchDataTable" class="table table-striped p-0">
+                        <thead>
+                            <tr class="table-secondary">
+                                <!-- column names -->
+                                <th class="align-middle">Select Rowset</th>
+                                {% for column in columns %}
+                                <th class="align-middle">{{ column }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody class="align-middle">
+                            <!-- for rows -->
+                            {% for row in data %}
+                            <tr>
+                                <td class="align-middle text-center"><input type="checkbox" class="checkbox"></td>
+                                {% for cell in row %}
+                                <td class="align-middle text-center">{{ cell }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% comment %} Choose Options{% endcomment %}
+        <div id="selectedOptionsToProceedContainer" class="predict-opt mb-4" style="display: none;">
+            <select class="btn btn-secondary dropdown-toggle form-select" aria-label="Default select example"
+                id="selectedOptionsToProceed">
+                <option selected disabled>Choose Options</option>
+                <option value="Select pre-trained model">pre-trained model</option>
+                <option value="Upload">Build Custom Model</option>
+            </select>
+        </div>
+
+        <div id="displayModels" class="predict-opt" style="display: none;">
+            <select class="btn btn-secondary dropdown-toggle" id="modelDropdown" class="form-select"
+                aria-label="Default select example">
+                <!-- models -->
+                <option selected disabled>Open this select menu</option>
+                {% for listmodel in listmodels %}
+                <option value="{{ listmodel }}">{{ listmodel }}</option>
+                {% endfor %}
+            </select>
+            <div class="">
+                <button id="PredictButton" class="btn btn-warning predict-btn">Predict</button>
+            </div>
+            <!-- prediction button -->
+            <p id="predictionError"></p>
+        </div>
+
+        <!-- Upload model section for model -->
+        <div id="uploadClick" style="display: none;">
+            <p><a href="{% url 'uploadModel'  %}" id="uploadLink">Click here to upload</a></p>
+        </div>
+
+
+        <div class="col-12 col-md-12 col-lg-12 mt-3 mb-5">
+            <!-- result Table -->
+            <h4 id="Predicted_DataSet" class="table-header text-primary mb-2" style="display: none;">Result:
+            </h4>
+            <div id="resultTable" class="table table-striped predict-table"></div>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-12 mt-3 mb-5">
+            <!-- Accuracy Table -->
+            <h4 id="Accuracy_DataSet" class="table-header text-primary mb-2" style="display: none;">Accuracy:
+            </h4>
+            <div id="AccuracyTable" class="table table-striped accuracy-table"></div>
+        </div>
+    </div>
+
+
+    <meta name="csrf-token" content="your_csrf_token_here">
+    <!-- Js -->
+    <script>
+
+        document.getElementById('fileForm').addEventListener('submit', function (event) {
+            // Prevent the form from submitting by default
+            event.preventDefault();
+
+            // Retrieve the selected file value from the dropdown
+            let selectedFile = document.getElementById('mainSelect').value;
+
+            // Check if a file is selected
+            if (selectedFile === 'select a file to predict') {
+                // If not, display an error message
+                document.getElementById('fileError').textContent = 'Please select a file';
+            } else {
+                // Otherwise, clear any existing error message
+                document.getElementById('fileError').textContent = '';
+                // Remove the event listener to allow form submission
+                document.getElementById('fileForm').removeEventListener('submit', arguments.callee);
+
+                // Submit the form programmatically
+                document.getElementById('fileForm').submit();
+                // Proceed with form submission
+                // You may also choose to submit the form programmatically
+                // Example: this.submit();
+            }
+        });
+
+        let PredictButton = document.getElementById('PredictButton');
+        let columns = {{ columns| safe}};
+        // for error when user press the button without seleting models
+        PredictButton.addEventListener('click', function () {
+            let selectedOption = document.getElementById('modelDropdown').value;
+            let predictionErrorMsg = document.getElementById('predictionError');
+
+            if (selectedOption === 'Choose a model') {
+                predictionErrorMsg.textContent = 'Select a model to predict!';
+            } else {
+                // Clear any previous error messages
+                predictionErrorMsg.textContent = '';
+
+                // Call the function to handle the selected rows and option
+                getPassData(selectedRows, selectedOption);
+            }
+        });
+
+        // to handle the chekcbox selection where the selected rows are stored into an array
+        const checkboxes = document.querySelectorAll('.checkbox');
+        const selectedRows = [];
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', function () {
+                // function for handling checkboxes
+                handleCheckboxChange(checkbox);
+            });
+        });
+        // here the process begins where check and uncheck handle from an array
+        function handleCheckboxChange(checkbox) {
+            const row = checkbox.closest('tr');
+            const rowData = Array.from(row.cells).slice(1).map(cell => cell.textContent.trim());
+
+            if (checkbox.checked) {
+                selectedRows.push(rowData);
+                // let displayModels = document.getElementById('displayModels');
+                let selectedOptionsToProceedContainer = document.getElementById('selectedOptionsToProceedContainer');
+                selectedOptionsToProceedContainer.style.display = 'block';
+            } else {
+                //removing unchecked row from an array
+                const index = selectedRows.findIndex(item => JSON.stringify(item) === JSON.stringify(rowData));
+                if (index !== -1) {
+                    selectedRows.splice(index, 1);
+                    if (selectedRows.length === 0) {
+                        //let displayModels = document.getElementById('displayModels');
+                        let selectedOptionsToProceedContainer = document.getElementById('selectedOptionsToProceedContainer');
+                        selectedOptionsToProceedContainer.style.display = 'none';
+                    }
+                }
+            }
+
+            console.log('Selected Rows:', selectedRows);
+        }
+
+
+        
+        let selectedOptions = document.getElementById('selectedOptionsToProceed');
+        let displayModels = document.getElementById('displayModels');
+        let uploadModelSectionContainer = document.getElementById('uploadModelSectionContainer');
+       
+
+        let customUpload = document.getElementById('uploadClick');
+        selectedOptions.addEventListener("change", function () {
+            if (this.value == "Select pre-trained model") {
+                displayModels.style.display = 'block'
+                customUpload.style.display = 'none'
+            }
+            else {
+                displayModels.style.display = 'none'
+                customUpload.style.display = 'block'
+            }
+        })
+
+
+        function getCSRFToken() {
+            const metaTag = document.querySelector('meta[name="csrf-token"]');
+            if (metaTag) {
+                return metaTag.getAttribute('content');
+            } else {
+                console.error('CSRF token meta tag not found.');
+                return null;
+            }
+        }
+
+
+        // Usage example
+        // function for pass the data to views where we can manage the selected rows based on models
+
+        async function getPassData(selectedRows, selectedOption) {
+            try {
+                const csrfToken = getCSRFToken();
+
+                const rowsStringified = JSON.stringify(selectedRows);
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': csrfToken
+                    },
+                    body: JSON.stringify({
+                        rows: rowsStringified,
+                        options: selectedOption,
+                        columns: columns // Assuming columns is defined somewhere in your code
+                    })
+                };
+                const response = await fetch('/predictModel/', requestOptions);
+                const responseData = await response.json();
+
+                if (responseData && responseData.data) {
+                    const resultData = JSON.parse(responseData.data);
+                    // DOM creation of tables
+                    const tableContainer = document.getElementById('resultTable');
+                    let Predicted_DataSet = document.getElementById('Predicted_DataSet');
+                    Predicted_DataSet.style.display = 'block';
+                    document.getElementById('Accuracy_DataSet').style.display = 'block';
+                    // Clear existing content in the table container
+                    tableContainer.innerHTML = '';
+
+                    // Check if there is accuracy data
+                    if (responseData.Accuracy !== undefined) {
+                        // Create accuracy table
+                        const accuracyContainer = document.getElementById('AccuracyTable');
+                        accuracyContainer.innerHTML = ''; // Clear existing content
+                        const accuracyTable = document.createElement('table');
+                        accuracyTable.classList = 'table';
+                        const accuracyHead = document.createElement('thead');
+                        const accuracyHeaderRow = document.createElement('tr');
+                        const accuracyHeaderCol1 = document.createElement('th');
+                        accuracyHeaderCol1.classList = 'table-secondary';
+                        accuracyHeaderCol1.textContent = 'Metric';
+                        const accuracyHeaderCol2 = document.createElement('th');
+                        accuracyHeaderCol2.classList = 'table-secondary';
+                        accuracyHeaderCol2.textContent = 'Score';
+                        accuracyHeaderRow.appendChild(accuracyHeaderCol1);
+                        accuracyHeaderRow.appendChild(accuracyHeaderCol2);
+                        accuracyHead.appendChild(accuracyHeaderRow);
+                        accuracyTable.appendChild(accuracyHead);
+
+                        // Create accuracy table body
+                        const accuracyBody = document.createElement('tbody');
+                        const accuracyRow = document.createElement('tr');
+                        const accuracyMetricCell = document.createElement('td');
+                        accuracyMetricCell.textContent = 'Accuracy';
+                        const accuracyScoreCell = document.createElement('td');
+                        accuracyScoreCell.textContent = responseData.Accuracy + '%';
+
+                        accuracyRow.appendChild(accuracyMetricCell);
+                        accuracyRow.appendChild(accuracyScoreCell);
+                        accuracyBody.appendChild(accuracyRow);
+                        accuracyTable.appendChild(accuracyBody);
+
+                        accuracyContainer.appendChild(accuracyTable);
+                    }
+
+                    // Create predicted data table
+                    const table = document.createElement('table');
+                    table.classList = 'table';
+                    const thead = document.createElement('thead');
+                    const headerRow = document.createElement('tr');
+                    for (const key of Object.keys(resultData[0])) {
+                        const th = document.createElement('th');
+                        th.textContent = key;
+                        th.classList = 'table-secondary';
+                        headerRow.appendChild(th);
+                    }
+                    thead.appendChild(headerRow);
+                    table.appendChild(thead);
+
+                    const tbody = document.createElement('tbody');
+                    for (const item of resultData) {
+                        const row = document.createElement('tr');
+
+                        for (const value of Object.values(item)) {
+                            const cell = document.createElement('td');
+                            cell.textContent = value;
+                            row.appendChild(cell);
+                        }
+                        tbody.appendChild(row);
+                    }
+                    table.appendChild(tbody);
+
+                    tableContainer.appendChild(table);
+                } else {
+                    console.log('Prediction Failed!');
+                }
+            } catch (error) {
+                console.error('Error:', error.message);
+                console.log('Prediction Failed!');
+            }
+        }
+
+
+        $(document).ready(function () {
+            $('#batchDataTable').DataTable({
+                "paging": true,       // Enable pagination
+                "pageLength": 10,     // Number of rows per page
+                "scrollX": true,      // Enable horizontal scrollbar
+                "autoWidth": false,   // Disable automatic column width calculation
+                "columnDefs": [
+                    { "width": "250px", "targets": "_all" },  // Set a specific width for all columns
+                ],
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

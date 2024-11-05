@@ -1,0 +1,72 @@
+{% extends 'base_analytics.html' %}
+ 
+{% block content %}
+ 
+<div class="header">
+    <div class="upload">
+        <p style="font-size:25px;text-shadow:0 2px 4px black;">Easily submit your forms by clicking the ‘Upload’ button below. <br>Whether it’s a PDF, Word document, or any
+            other format, we’ve got you covered!</p><br>    
+    </div>
+    <div class="col-12 col-md-3 col-lg-3">
+        <button><a href="/upload">Upload</a></button>
+    </div>
+</div>
+ 
+<div class="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="tag mt-5">
+                <h3> Our services in NLP</h3>
+                <p style="color:white;">Our AI Language empowers developers to build intelligent applications by leveraging NLP capabilities.
+                </p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mx-auto nlp_div">
+                <h5>OpenAI’s GPT-3</h5>
+                <p>The Generative Pre-trained Transformer 3 (GPT-3) is a powerful language model known for its language
+                    generation capabilities.</p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mx-auto nlp_div">
+                <h5>BERT <br>(Bidirectional Encoder Representations from Transformers)</h5>
+                <p> Developed by Google, BERT is a pre-trained transformer model designed for bidirectional text
+                    representation.</p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mx-auto nlp_div">
+                <h5>spaCy</h5>
+                <p>An open-source NLP library, spaCy is known for its speed and efficiency. It provides pre-trained
+                    models for tasks like tokenization, named entity recognition, and part-of-speech tagging.</p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mx-auto nlp_div">
+                <h5>NLTK <br>(Natural Language Toolkit)</h5>
+                <p> A comprehensive library for NLP, NLTK has been a staple in the field for years.</p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mx-auto nlp_div">
+                <h5>AllenNLP</h5>
+                <p>Built on PyTorch, AllenNLP provides pre-trained models and tools for various NLP tasks,
+                    including text classification, named entity recognition, and coreference resolution.</p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4 mx-auto nlp_div">
+                <h5>Transformers by Hugging Face</h5>
+                <p>Hugging Face’s Transformers library offers a collection of pre-trained transformer models, including
+                    BERT, GPT-2, and RoBERTa.</p>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 mx-auto nlp_div">
+                <h5>Stanford NLP Library</h5>
+                <p>Used in academia and industry, the Stanford NLP Library provides pre-trained models for sentiment
+                    analysis, named entity recognition, and part-of-speech tagging.</p>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 mx-auto nlp_div">
+                <h5>IBM Watson Natural Language Understanding</h5>
+                <p>IBM Watson’s NLU service offers cloud-based solutions for various NLP tasks, including sentiment
+                    analysis, emotion detection, and entity recognition.</p>
+            </div>
+            <!-- <div class="scroll-container">
+                <marquee class="scroll-item">
+                    <p> * Descriptive Analytics * Prescriptive Analytics * Predictive Analytics * Diagnostic Analytics
+                    </p>
+                </marquee>
+            </div> -->
+        </div>
+    </div>
+</div>
+ 
+{% endblock %}

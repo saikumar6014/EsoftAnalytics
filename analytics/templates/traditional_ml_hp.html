@@ -1,0 +1,72 @@
+{%extends "base_analytics.html"%}
+ 
+ 
+{%block content%}
+<div class="video mb-5">
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"
+        src="/analytics/static/video/video.mp4"></video>
+    <h2 class="videContent">We harness the power of machine learning <br>
+        without the complexities.</h2>
+</div>
+ 
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-12 mb-5"
+            style="text-align: center;display: flex;justify-content: center;flex-direction: column;">
+            <h3 class="ml_main_content_head mb-3">Training Models</h3>
+            <p class="ml_main_content_para" style=" color:white;">We train our models, to provide user better experience.</p>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="shadow p-4 mlContainer">
+                <h3>Batch Data Processing</h3>
+                <p style="text-align: center; color:white;">Batch processing involves processing large volumes of data at once in batches or groups.</p>
+                <h5>Advantages</h5>
+                <ul class="noliststyle mb-3">
+                    <li>Data is collected over a period of time (e.g., hours, days, or weeks).</li>
+                    <li>Processed offline,once a sufficient amount of data is accumulated.</li>
+                    <li>Completion time is not critical; it can take as long as needed.</li>
+                    <li>Provides an economical and straightforward processing method for business applications.</li>
+                    <li>Data is often sorted before processing.</li>
+                </ul>
+                <button class="m-0 p-0" id="mlButton"><a class="text-white" href="{% url 'batch_list_files' %}">Try This!</a></button>
+            </div>
+        </div>
+ 
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="shadow p-4 mlContainer">
+                <h3>Real-time Data Processing</h3>
+                <p style="text-align: center; color:white;">It is essential for quick responses and handling a large number of events within tight deadlines.
+                </p>
+                <h5>Advantages</h5>
+                <ul class="noliststyle mb-3">
+                    <li>Real-time processing systems are very fast and responsive.</li>
+                    <li>Process data immediately or with minimal delay as it is generated or ingested.</li>
+                    <li>Quick transaction handling</li>
+                    <li>Supplies immediate responses.</li>
+                    <li>Reduction in Data Loss & Facilitated Data Recovery</li>
+                </ul>
+                <button class="m-0 p-0" id="mlButton"><a class="text-white" href="{% url 'real_list_files' %}">Try This!</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="benefits shadow">
+                <h4 style="color:#36b0ed">Benefits</h4>
+                <h2 style="font-weight: 100;color:white;">Achieve sustainable and purpose-driven value.</h2>
+                <ul class="noliststyle">
+                    <li>Irreplaceable Algorithms</li>
+                    <li>Significant results with smaller and simpler datasets</li>
+                    <li>Interpretability in critical applications</li>
+                    <li>Efficient and Practical.</li>
+                    <li>Robust for diverse industries dealing with scalability, complex data, and limited resources.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

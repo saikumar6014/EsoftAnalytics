@@ -1,0 +1,115 @@
+.video {
+  display: flex;
+}
+ 
+.video video {
+  width: 100%;
+}
+ 
+.video h2 {
+  margin-left: -95%;
+  margin-top: 19%;
+  color: white;
+  text-shadow: 0 4px 6px #36b0ed;
+  font-size: 40px;
+}
+ 
+.liststyle li {
+  list-style: disc;
+  text-align: left;
+}
+ 
+.tra_ml_hp_data {
+  position: relative;
+  height: auto;
+  margin-bottom: 5%;
+  padding: 2%;
+  width: auto;
+  overflow-x: auto;
+}
+ 
+.row {
+  display: flex;
+}
+ 
+.ml_main_content_head {
+  color: #36b0ed;
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-align: center;
+  margin: auto;
+  letter-spacing: 1px;
+}
+ 
+.ml_main_content_para {
+  text-align: center;
+  margin: auto;
+  margin-bottom: 20px;
+}
+ 
+ 
+.noliststyle {
+  text-align: center;
+  list-style: none;
+  color:white;
+}
+ 
+.ml>h3, p{
+  text-align: left;
+  margin-top: 3%;
+  margin-left:2%;
+}
+ 
+.benefits_list{
+  text-align: center;
+}
+ 
+@media (max-width : 600px) {
+  .videContent {
+    font-size: 15px;
+  }
+}
+ 
+ 
+.benefits {
+  padding: 10px;
+  border-radius: 50%;
+  border:1px solid #36b0ed;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ 
+}
+
+ 
+ 
+#mlButton {
+  background-image: linear-gradient(to left, black, #36b0ed) !important;
+  height: 45px !important;
+  border-radius: 10px !important;
+  font-size: 15px !important;
+  border: none !important;
+  width: 200px !important;
+  transition: 0.2s all ease-in-out;
+}
+#mlButton:hover {
+  background-image: linear-gradient(to right, black, #36b0ed) !important;
+}
+ 
+.mlContainer {
+  min-height: 500px !important;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+  border:1px solid #36b0ed;
+  box-shadow: 0 4px 6px #fcfdfd(0, 0, 0, 0.1);
+}
+
+h3, h5{
+  color:#36b0ed !important;
+}

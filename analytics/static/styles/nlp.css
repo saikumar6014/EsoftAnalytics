@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+ 
+* {
+    font-family: Poppins;
+    margin: 0;
+    padding: 0;
+ 
+}
+ 
+/* .main-container .scroll-container {
+    margin-top: 5%;
+    padding: 10px;
+    font-size: 30px;
+    align-items: center;
+    text-align: center;
+    background-image: linear-gradient(to top, rgb(6, 6, 6), #36b0ed);
+}
+ 
+.main-container .scroll-container .scroll-item {
+    color: white;
+    padding:0;
+   
+}*/
+ 
+.mt-5 {
+    margin-top: 6% !important;
+}
+ 
+.nlp_div {
+    width: 400px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 22px;
+    border-radius: 75px 15px 65px 15px;
+    border:1px solid #36b0ed;
+    text-align:center;
+    box-shadow: 0 2px 4px rgba(224, 224, 224, 0.1);
+    transition: height 0.5s;
+}
+ 
+.nlp_div:hover {
+    transform: translateY(-5px);
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+}
+ 
+.nlp_div p{
+    color:white;
+}
+ 
+h5{
+    color:#36b0ed;
+    font-size: 23px;
+}
+ 
+h3 {
+    color: #36b0ed;
+    font-weight: 500;
+    font-size: 30px;
+    text-align: center;
+}
+.tag p{
+    text-align: center;
+}
+.header {
+    background-image:url('/static/images/analytics.jpg');
+    height: 100vh;
+    width: 100vw;
+    display: block;
+    align-items: center;
+    background-size: cover;
+
+}
+.upload{
+    padding-top:20%;
+}
+ 
+button{
+    background-color: transparent;
+    border-radius:20px;
+    padding:15px 20px;
+    border:2px solid #05faf6;
+    margin-left:19%;
+   
+}
+button:hover {
+    background-color: #05faf6;
+    border-radius:20px;
+    padding:15px 20px;
+    border:none;
+ 
+ 
+}
+button:hover a{
+    color:white;
+}
+button a{
+    text-decoration: none;
+    color:white;
+    font-size: 18px;
+}
+.header > .upload > p{
+    color:white;
+    margin-left: 100px;
+    font-size:20px;
+}

@@ -1,0 +1,107 @@
+{% extends "base_analytics.html" %}
+{% block content %}
+<!-- <div class="carousel slide" id="carouselDemo" data-bs-wrap="true" data-bs-ride="carousel">
+    <div class="carousel-inner" data-bs-interval="3000">
+        <div class="carousel-item active">
+            <img class="w-100" src="../static/images/analytics.png" alt="">
+            <div class="carousel-caption">
+                <h5></h5>
+                <p></p>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img class="w-100" src="../static/images/how it works.jpg" alt="">
+            <div class="carousel-caption">
+                <h5></h5>
+                <p></p>
+            </div>
+        </div>
+        <div class="carousel-item " data-bs-interval="1000">
+            <img class="w-100" src="../static/images/insights.jpeg" alt="">
+            <div class="carousel-caption">
+                <h5></h5>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+<button style="background-color: transparent;" class="carousel-control-prev" type="button" data-bs-target="#carouselDemo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+</button>
+<button style="background-color: transparent;" class="carousel-control-next" type="button" data-bs-target="#carouselDemo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+</button>
+<div class="carousel-indicators">
+    <button type="button" class="active" data-bs-target="#carouselDemo" data-bs-slide-to="0"></button>
+    <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="2"></button>
+</div>  -->
+ 
+<div class="aaHeroContainer">
+    <div class="text-center" style="width: 50%;">
+        <h1 class="aaHeroHead mb-4">
+            Unlocking the Potential of AI Space
+        </h1>
+        <p class="aaHeroPara mb-3">
+            AI enables predictive analytics, empowering businesses to anticipate user needs, forecast trends, and make
+            data-driven decisions. By analyzing historical data and identifying patterns, AI websites can proactively
+            address customer concerns, optimize product offerings, and capitalize on emerging opportunities.
+        </p>
+        <button class="aaHeroButton_explore mt-2"><a class="text-white" href="{% url 'traditional_ml' %}">Explore
+                Future</a></button>
+    </div>
+</div>
+ 
+ 
+<div class="container main-container d-flex justify-content-center align-items-center flex-column" style="min-height: 50vh;">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="text-center" style="border-bottom: 1px solid #36b0ed;">
+                <h2 class="aaMidSectionHead mt-4 mb-2" style="color: #36b0ed;">Advanced Analytics</h2>
+                <p class="" style="text-align: center;font-size:20px; color:white;">
+                    Advanced analytics empowers organizations to move beyond hindsight and gain foresight,enabling
+                    better
+                    secision-making and strategic planning.
+                </p>
+            </div>
+        </div>
+        <div class="col-12 mb-5">
+            <div class="text-center">
+                <h3 tyle="color: #36b0ed;">Deep dive with us..</h3>
+                <p class=""  style="text-align: center;font-size:20px; color:white;">AI Advanced Analytics provides many services</p>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="text-center shadow benefit">
+                <h2 style="color: #36b0ed;">Improved Decision-Making</h2>
+                <p style="text-align: center;font-size:18px;">By predicting future outcomes, businesses can make informed choices.</p>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="text-center shadow benefit">
+                <h2 style="color: #36b0ed;">Fraud Detection</h2>
+                <p style="text-align: center;font-size:18px;">Advanced analytics helps detect fraudulent activities by analyzing patterns and anomalies.</p>
+            </div>
+        </div>
+ 
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="text-center shadow benefit">
+                <h2 style="color: #36b0ed;">Marketing Strategy</h2>
+                <p style="text-align: center;font-size:18px;">Predictive models guide targeted marketing campaigns based on customer behavior.</p>
+            </div>
+        </div>
+ 
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="text-center shadow benefit">
+                <h2 style="color: #36b0ed;">Risk Management</h2>
+                <p style="text-align: center;font-size:18px;">Predictive models assess risks and recommend mitigation strategies.</p>
+            </div>
+        </div>
+ 
+    </div>
+</div>
+{% endblock %}
+ 
+{% block script %}
+<script src="/static/js/analytics.js"></script>
+{% endblock %}
